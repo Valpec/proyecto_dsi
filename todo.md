@@ -1,1 +1,2 @@
 - hacer las realaciones entre las clases (import)
+- 

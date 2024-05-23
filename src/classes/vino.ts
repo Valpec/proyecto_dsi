@@ -1,3 +1,5 @@
+import { Maridaje } from "./maridaje";
+import { Resena } from "./resena";
 export class Vino {
 
     private anada: number;
@@ -5,13 +7,19 @@ export class Vino {
     private nombre: string;
     private notaDeCataBodega: string;
     private precioArs: number;
+    private maridaje: Maridaje;
+    private resena: Resena;
 
-    constructor(anada: number, imagenEtiqueta: string, nombre: string,notaDeCataBodega: string, precioArs: number) {
+
+    constructor(anada: number, imagenEtiqueta: string, nombre: string,notaDeCataBodega: string, precioArs: number, maridaje: Maridaje, resena: Resena) {
         this.anada = anada;
         this.imagenEtiqueta = imagenEtiqueta;
         this.nombre = nombre;
         this.notaDeCataBodega = notaDeCataBodega;
-        this.precioArs = precioArs
+        this.precioArs = precioArs;
+        this.maridaje = maridaje;
+        this.resena = resena
+
     }
     calcularRanking() {
     }

@@ -19,5 +19,9 @@ export class Varietal {
     }
     mostrarPorcentaje() {
     }
+
+    getDescripcion(){
+        return this.descripcion
+    }
     
 }

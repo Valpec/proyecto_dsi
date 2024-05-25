@@ -32,3 +32,7 @@ for(let i=0; i< vinos.length; i ++){
     // vinos[i].mostrarResena(vinos[i])
 }
 console.log(vinos)
+
+// const periodo = gestorReporte.validarPeriodo('2013/01/01', '2024/12/30')
+
+gestorReporte.buscarVinosEnPeriodoConResenas('2013/01/01', '2024/12/30', 'Sommelier', vinos)

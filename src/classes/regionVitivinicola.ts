@@ -12,5 +12,7 @@ export class RegionVitivinicola {
     }
     contarBodegas() {
     }
-    
+    getRegion(){
+        return this.nombre
+    }
 }

@@ -25,5 +25,29 @@ export class Resena {
     }
     mostrarNombre() {
     }
-    
+    getPuntaje(){
+        return this.puntaje
+    }
+
+
+    sosDeSommelier(){
+        if(this.premium){
+            return true
+        }
+        else{
+            return false
+        }
+    }
+
+    esEnPeriodoFecha(desde:string, hasta:string){
+        const fecha = new Date(this.fechaResena)
+        const desdeEnDate = new Date(desde)
+        const hastaEnDate = new Date(hasta)
+
+        if(fecha >= desdeEnDate && fecha <= hastaEnDate){
+            return true
+        }else{
+            return false
+        }
+    }
 }

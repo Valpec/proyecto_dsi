@@ -3,6 +3,10 @@ import { Varietal } from "./classes/varietal";
 import { Vino } from "./classes/vino";
 import { TipoUva } from "./classes/tipoUva";
 import { Resena } from "./classes/resena";
+import { Bodega } from "./classes/bodega";
+import { RegionVitivinicola } from "./classes/regionVitivinicola";
+import { Pais } from "./classes/pais";
+import { Provincia } from "./classes/provincia";
 
 const descripcionesDeVinos: string[] = [
     "Un vino tinto con aromas intensos de frutas rojas y un toque de roble.",
@@ -44,7 +48,14 @@ function generarNumeroAleatorio(min:number, max:number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
+function crearBodega(){
+    let region = new RegionVitivinicola( "La tierra es roja", "Tierra")
+    let provincia =  new Provincia('Cordoba', [region])
+    let pais = new Pais('Argentina', [provincia])
+    
+    let bodega = new Bodega( [""], "Bodega rosita, Bodega familiar muy querida por los vecinos","Fundada en 100 A.C",  "Mira que vino", "1900/12/13", region)
+    return bodega
+}
 let vinos:Vino[] = []
 
 function generarMaridajeAleatorio() {
@@ -76,8 +87,9 @@ export const crearVinosAutomaticos = (cantidad:number) => {
                 new TipoUva('mendocina', 'malbec')
             )
         ]
-        
-        let vino = new Vino(anada, "", nombre, notaCataBodega, precio, maridaje, varietal);
+        let bodega = crearBodega()
+
+        let vino = new Vino(anada, "", nombre, notaCataBodega, precio, maridaje, varietal, bodega);
         vinos.push(vino);
         
     }
@@ -118,7 +130,7 @@ export const crearResenaAleatoria = (vino:Vino) => {
     let ano = generarNumeroAleatorio(2013,2024)
     let mes = generarNumeroAleatorio(1,12)
     let dia = generarNumeroAleatorio(1,31)
-    let fechaResena = `${ano}-${mes}-${dia}`
+    let fechaResena = `${ano}/${mes}/${dia}`
     let puntajeResena = generarNumeroAleatorio(0,10)
     let fraseIndice = generarNumeroAleatorio(0, frasesResenas.length - 1);
     let frase = frasesResenas[fraseIndice];

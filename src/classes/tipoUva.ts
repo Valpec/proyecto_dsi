@@ -1,4 +1,4 @@
-export class tipoUva {
+export class TipoUva {
 
     private descripcion: string;
     private nombre: string;

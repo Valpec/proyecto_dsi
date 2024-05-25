@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tipoUva = void 0;
-class tipoUva {
+exports.TipoUva = void 0;
+class TipoUva {
     constructor(descripcion, nombre) {
         this.descripcion = descripcion;
         this.nombre = nombre;
     }
 }
-exports.tipoUva = tipoUva;
+exports.TipoUva = TipoUva;

@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pais = void 0;
 class Pais {
-    constructor(nombre) {
+    constructor(nombre, provincias) {
         this.nombre = nombre;
+        this.provincias = provincias;
     }
     contarBodegas() {
     }

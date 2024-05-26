@@ -11,3 +11,5 @@
 
 - ver nota de duda de fecha en el gestor validarPeriodo()
 - ver en el gestor, como se guardan los vinos con el indice en el loop. 
+
+- por modularidad, deberia meter las interfaces en un arch interface. Hacer despues

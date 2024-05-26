@@ -6,6 +6,10 @@ const varietal_1 = require("./classes/varietal");
 const vino_1 = require("./classes/vino");
 const tipoUva_1 = require("./classes/tipoUva");
 const resena_1 = require("./classes/resena");
+const bodega_1 = require("./classes/bodega");
+const regionVitivinicola_1 = require("./classes/regionVitivinicola");
+const pais_1 = require("./classes/pais");
+const provincia_1 = require("./classes/provincia");
 const descripcionesDeVinos = [
     "Un vino tinto con aromas intensos de frutas rojas y un toque de roble.",
     "Este vino blanco destaca por sus notas cítricas y un final refrescante.",
@@ -43,6 +47,17 @@ const maridajes = [
 function generarNumeroAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+function crearBodega() {
+    let region = new regionVitivinicola_1.RegionVitivinicola("La tierra es roja", "Tierra");
+    // let provincia =  new Provincia('Cordoba', [region])
+    let provincia = new provincia_1.Provincia('Cordoba');
+    provincia.establecerRegion(region);
+    // let pais = new Pais('Argentina', [provincia])
+    let pais = new pais_1.Pais('Argentina');
+    pais.establecerProvincia(provincia);
+    let bodega = new bodega_1.Bodega([""], "Bodega rosita, Bodega familiar muy querida por los vecinos", "Fundada en 100 A.C", "Mira que vino", "1900/12/13", region);
+    return bodega;
+}
 let vinos = [];
 function generarMaridajeAleatorio() {
     let maridaje = [];
@@ -64,7 +79,8 @@ const crearVinosAutomaticos = (cantidad) => {
             new varietal_1.Varietal('rico', 90, new tipoUva_1.TipoUva('cordobesa', 'lila')),
             new varietal_1.Varietal('suave', 85, new tipoUva_1.TipoUva('mendocina', 'malbec'))
         ];
-        let vino = new vino_1.Vino(anada, "", nombre, notaCataBodega, precio, maridaje, varietal);
+        let bodega = crearBodega();
+        let vino = new vino_1.Vino(anada, "", nombre, notaCataBodega, precio, maridaje, varietal, bodega);
         vinos.push(vino);
     }
     return vinos;
@@ -96,12 +112,13 @@ const frasesResenas = [
     "Un aroma embriagador que invita a disfrutarlo.",
     "Lo compré por curiosidad y ahora se ha convertido en mi favorito."
 ];
+// const tipoResena = ['Amigos', 'Sommelier', 'Normal']
 // Ejemplo de uso:
 const crearResenaAleatoria = (vino) => {
     let ano = generarNumeroAleatorio(2013, 2024);
     let mes = generarNumeroAleatorio(1, 12);
     let dia = generarNumeroAleatorio(1, 31);
-    let fechaResena = `${ano}-${mes}-${dia}`;
+    let fechaResena = `${ano}/${mes}/${dia}`;
     let puntajeResena = generarNumeroAleatorio(0, 10);
     let fraseIndice = generarNumeroAleatorio(0, frasesResenas.length - 1);
     let frase = frasesResenas[fraseIndice];

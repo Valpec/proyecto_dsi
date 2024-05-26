@@ -1,7 +1,5 @@
-import { Provincia } from "./provincia";
 import { RegionVitivinicola } from "./regionVitivinicola";
 export class Bodega {
-    // readonly name: string = 'asd' // para que no se inicie afuera de este consturctor
 
     private coordenadasUbicacion: string[];
     private descripcion: string;
@@ -18,15 +16,10 @@ export class Bodega {
         this.periodoActualizacion = periodoActualizacion
         this.regionVitivinicola = region
     }
-    // setProvincia(provincia:Provincia){
-    //     this.provincia = provincia
-    // }
-    //deberia la resenia ser un array? resenias.length
-    contarResenias(resenas: string[]) {
-        //codigo lololololol
+  
+    contarResenias() {
     }
-    mostrarTodosVinos(vinos: string[]) {
-        //codigo ????
+    mostrarTodosVinos() {
     }
     
     getNombre(){
@@ -34,10 +27,11 @@ export class Bodega {
     }
 
     buscarRegionProvinciaPais(){
+        // para hacer esto, tuve que crear funciones dentro de cada clase para que tengan un atributo con el nombre de sus padres. 
+        // creo que me mando moco, porque la asignacion es desde el padre, cuando se ejecuta un metodo, para el cual yo permito que sus hijos sea nulo. creo que eso no respeta el diagrama y la multiplicidad VERRRRRVERVER
         const region = this.regionVitivinicola.getNombre()
         const provincia = this.regionVitivinicola.obtenerProvincia()
         const pais = this.regionVitivinicola.buscarPais()
-        //COMO traigo la data de la provincia sin tanto acoplamietno !!
        return {region, provincia, pais}
         
     }

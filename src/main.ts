@@ -1,38 +1,33 @@
-import { crearVinosAutomaticos, crearResenaAleatoria} from "./crearVinos";
+// import { crearVinosAutomaticos, crearResenaAleatoria} from "./crearVinos";
 
-
-import { GestorReporteRankingVinos } from "./classes/gestorReporteRankingVinos"
+import { GestorReporteRankingVinos , VinoEncontrado} from "./classes/gestorReporteRankingVinos"
 import { Pantalla } from "./classes/pantallaGenerarRankingVinos"
 import { Vino } from "./classes/vino";
-import { TipoUva } from "./classes/tipoUva";
-TipoUva
 
-const vinosArray: Vino[] = [
-    
-]
-
-
-let gestorReporte = new GestorReporteRankingVinos(vinosArray)
-let pantalla = new Pantalla(gestorReporte)
-
-
-// ******* Validar Periodo ***********
-gestorReporte.validarPeriodo('2020/12/23', '2021/12/23')
-// pantalla.generarRankingVinos(gestorReporte)
-
-
-// crear los vinos
-let vinos = crearVinosAutomaticos(15)
-console.log(vinos)
-console.log(typeof(vinos))
-//agregar una resena a un vino
-
-for(let i=0; i< vinos.length; i ++){
-    let resena = crearResenaAleatoria(vinos[i])
-    // vinos[i].mostrarResena(vinos[i])
+import vinosData from './data/vinos.json'
+// esta interfaz de reporte es la estructura que deben respetar los datos pasado como objeto del formulario del html (app.ts para ver como esta documentado)
+export interface Reporte {
+    fechaDesde: string;
+    fechaHasta: string;
+    tipoResena: string;
+    formaVisualizacion: string;
 }
-console.log(vinos)
 
-// const periodo = gestorReporte.validarPeriodo('2013/01/01', '2024/12/30')
 
-gestorReporte.buscarVinosEnPeriodoConResenas('2013/01/01', '2024/12/30', 'Sommelier', vinos)
+// array de todos los vinos. A futuro meterlo en .json y usar 'fs' de node
+// const vinosArray: Vino[] = vinosData
+const vinosArray:Vino[] = []
+
+// instancia del gestor al que le paso los metodos
+let gestorReporte = new GestorReporteRankingVinos(vinosArray)
+// let pantalla = new Pantalla(gestorReporte)
+
+
+export function tomarConfirmacionGenerarReporte(reporte:Reporte){
+    let datosReporte = reporte
+    gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+};
+
+export function informarGeneracion(vinos:VinoEncontrado[]){
+    // de aca, les encargo para que muestre en el front en una tabla los vinos en el top 10 con la info solicitada.
+}

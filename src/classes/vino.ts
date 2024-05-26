@@ -10,8 +10,8 @@ export class Vino {
     private notaDeCataBodega: string;
     private precioArs: number;
     private maridaje: Maridaje[];
-    // private resena: Resena[];
-    resena: Resena[] = []
+    private resena: Resena[] = [];
+    // resena: Resena[] = []
     private varietal: Varietal[]
     private bodega: Bodega
 
@@ -30,6 +30,7 @@ export class Vino {
     agregarResena(resenaNueva:Resena){
 
         this.resena.push(resenaNueva)
+        resenaNueva.establecerVino(this)
     }
     mostrarResena(vinoPasado:Vino){
         console.log(vinoPasado.resena)

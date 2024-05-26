@@ -6,17 +6,19 @@ export class Resena {
     private premium: boolean;
     private fechaResena: string;
     private puntaje: number;
-    private vino: Vino;
+    private vino: Vino | null=null;
 
     // que tipo?????? poara la fechaHora
 
-    constructor(comentario: string,  premium: boolean, fechaResena: string, puntaje: number, vino: Vino) {
+    constructor(comentario: string,  premium: boolean, fechaResena: string, puntaje: number) {
         this.comentario = comentario;
         this.premium = premium;
         this.fechaResena = fechaResena;
         this.puntaje = puntaje;
-        this.vino = vino;
 
+    }
+    establecerVino(vino:Vino){
+        this.vino=vino
     }
     esPremium() {
         

@@ -14,13 +14,25 @@ export class RegionVitivinicola {
     }
     contarBodegas() {
     }
-    
-    getRegion(){
-        return this.nombre
-    }
+
 
     establecerProvincia(provincia: Provincia){
         this.provincia = provincia
     }
+
+    
+    getNombre(){
+        return this.nombre
+    }
+    obtenerProvincia(){
+        return this.provincia?.getNombre()
+    }
+    
+    buscarPais(){
+        return this.provincia?.obtenerPais()
+    }
+   
+
+  
     
 }

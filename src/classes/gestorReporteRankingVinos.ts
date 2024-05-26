@@ -3,6 +3,14 @@ import { Vino } from "./vino";
 //     desde: Date;
 //     hasta: Date
 // }
+
+interface VinoEncontrado {
+    nombreVino: string;
+    promedioSomm: number;
+    precioSugeridoVino: number;
+    datosBodega: object;
+    varietales: string[];
+}
 export class GestorReporteRankingVinos<T> {
     // private vinos: T[] = [];
     private vinos: T[];
@@ -52,20 +60,30 @@ export class GestorReporteRankingVinos<T> {
     }
     // periodo deberia ser obj con las dos fechas validadas? array por el mometno
     buscarVinosEnPeriodoConResenas(desde: string, hasta:string, tipoResena:string, vinos:Vino[]){
+        let vinosEncontrados:VinoEncontrado[] = []
+
         for(let i=0; i< vinos.length; i ++){
             let puntajes = vinos[i].conocerResenasEnPeriodo(desde, hasta)
             if(puntajes.length === 0){
                 console.error('No hay resenas de someelier en el periodo indicado, para el vino seleccionado')
             }
-            let promedio = this.calcularPromCalificacionPorSommelier(puntajes)
+            const promedioSomm = this.calcularPromCalificacionPorSommelier(puntajes)
 
             const nombreVino = vinos[i].getNombre()
             const precioSugeridoVino = vinos[i].getPrecioSugerido()
 
-            //terminar de implementar las relaciones esas feas de pis provincia region
-            vinos[i].buscarDatosBodega()
+           
+            const datosBodega = vinos[i].buscarDatosBodega()
+            // {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
             const varietales = vinos[i].buscarVarietal()
+            // [desc1, desc2, desc3]
+
+
+            //VER, creo que datia problema el asignar con el indicice si es que hay sin puntaje.
+            const datosVino = {nombreVino, promedioSomm, precioSugeridoVino, datosBodega, varietales}
+            vinosEncontrados[i] = datosVino
         }
+        return vinosEncontrados
 
     }
 
@@ -75,8 +93,11 @@ export class GestorReporteRankingVinos<T> {
         return promedio
     }
 
-    ordenarVinosPorCalificacion(){
-
+    ordenarVinosPorCalificacion(vinosEncontrados:VinoEncontrado[]){
+        let vinosOrdenados = vinosEncontrados.sort((a,b) => a.promedioSomm - b.promedioSomm)
+        // COMO NO HAGO EL DE BUSCAR EL PROMEDIO DE CALIFICACION GENERAL, SACO DE ACA EL TOP 10 !!!!!!
+        let topDiez = vinosOrdenados.splice(0,10)
+        return topDiez
     }
 
 

@@ -50,8 +50,12 @@ function generarNumeroAleatorio(min:number, max:number) {
 
 function crearBodega(){
     let region = new RegionVitivinicola( "La tierra es roja", "Tierra")
-    let provincia =  new Provincia('Cordoba', [region])
-    let pais = new Pais('Argentina', [provincia])
+    // let provincia =  new Provincia('Cordoba', [region])
+    let provincia = new Provincia('Cordoba')
+    provincia.establecerRegion(region)
+    // let pais = new Pais('Argentina', [provincia])
+    let pais = new Pais('Argentina')
+    pais.establecerProvincia(provincia)
     
     let bodega = new Bodega( [""], "Bodega rosita, Bodega familiar muy querida por los vecinos","Fundada en 100 A.C",  "Mira que vino", "1900/12/13", region)
     return bodega

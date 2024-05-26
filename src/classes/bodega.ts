@@ -34,11 +34,11 @@ export class Bodega {
     }
 
     buscarRegionProvinciaPais(){
-        const region = this.regionVitivinicola.getRegion()
-        // const provincia = this.regionVitivinicola.
-
-        // implementar la busqueda del pais y la provincia !!!!!
-
+        const region = this.regionVitivinicola.getNombre()
+        const provincia = this.regionVitivinicola.obtenerProvincia()
+        const pais = this.regionVitivinicola.buscarPais()
+        //COMO traigo la data de la provincia sin tanto acoplamietno !!
+       return {region, provincia, pais}
         
     }
 }

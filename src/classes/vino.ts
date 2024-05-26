@@ -65,9 +65,10 @@ export class Vino {
 
     buscarDatosBodega(){
         const nombreBodega = this.bodega.getNombre()
+        // el regionProvPais es un obtejo
         const regionProvinciaPais = this.bodega.buscarRegionProvinciaPais()
         
-        return this.bodega
+        return {nombreBodega, regionProvinciaPais}
     }
     
     buscarVarietal(){

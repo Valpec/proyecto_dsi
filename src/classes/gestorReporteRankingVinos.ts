@@ -6,7 +6,7 @@ import { Vino } from "./vino";
 export class GestorReporteRankingVinos<T> {
     // private vinos: T[] = [];
     private vinos: T[];
-    private vinosDeSommelier: string[]
+    // private vinosDeSommelier: string[]
 
     constructor(vinos:T[],){
         this.vinos = vinos;
@@ -76,9 +76,9 @@ export class GestorReporteRankingVinos<T> {
     }
 
     ordenarVinosPorCalificacion(){
-        
+
     }
 
 
-    
+    generarReporte(){}
 }

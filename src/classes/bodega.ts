@@ -9,7 +9,6 @@ export class Bodega {
     private nombre: string;
     private periodoActualizacion: string;
     private regionVitivinicola: RegionVitivinicola;
-    private provincia:Provincia | null = null
 
     constructor(coordenadasUbicacion: string[], descripcion: string, historia: string, nombre: string, periodoActualizacion: string, region: RegionVitivinicola) {
         this.coordenadasUbicacion = coordenadasUbicacion;
@@ -19,9 +18,9 @@ export class Bodega {
         this.periodoActualizacion = periodoActualizacion
         this.regionVitivinicola = region
     }
-    setProvincia(provincia:Provincia){
-        this.provincia = provincia
-    }
+    // setProvincia(provincia:Provincia){
+    //     this.provincia = provincia
+    // }
     //deberia la resenia ser un array? resenias.length
     contarResenias(resenas: string[]) {
         //codigo lololololol

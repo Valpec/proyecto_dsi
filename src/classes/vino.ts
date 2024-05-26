@@ -78,6 +78,20 @@ export class Vino {
         }
         return varietales
     }
+    
+    conocerResenas(desde:string, hasta:string){
+        let puntajesGral = []
 
-    // al parecer, los get y set son mala practica !!!!!!
+        for(let i=0; i< this.resena.length; i ++){
+            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
+
+            if(esDePeriodo){
+                let punt = this.resena[i].getPuntaje()
+                puntajesGral.push(punt)
+            }
+        }
+        return puntajesGral
+
+    }
+
 }

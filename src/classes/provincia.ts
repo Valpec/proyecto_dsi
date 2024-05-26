@@ -14,5 +14,8 @@ export class Provincia {
     mostrarRegiones() {
     }
     
-    
+    establecerRegion(region:RegionVitivinicola){
+        this.regiones.push(region);
+        region.establecerProvincia(this);
+    }
 }

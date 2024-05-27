@@ -32,11 +32,11 @@ export function informarGeneracion(vinos:VinoEncontrado[]){
     // de aca, les encargo para que muestre en el front en una tabla los vinos en el top 10 con la info solicitada.
 }
 
-const reporte:Reporte = {
-    fechaDesde: "13/12/2013",
-    fechaHasta: "10/12/2024",
-    tipoResena: "1",
-    formaVisualizacion: "excel",
-}
+// const reporte:Reporte = {
+//     fechaDesde: "13/12/2013",
+//     fechaHasta: "10/12/2024",
+//     tipoResena: "1",
+//     formaVisualizacion: "excel",
+// }
 
-gestorReporte.tomarConfirmacionGenerarReporte(reporte, vinosArray);
+// gestorReporte.tomarConfirmacionGenerarReporte(reporte, vinosArray);

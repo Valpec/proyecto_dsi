@@ -22,34 +22,17 @@ export class GestorReporteRankingVinos<T> {
     }
 
     // las funciones parseDate y validar periodo son porque la fecha ingresada es en formato 'dd/mm/yyyy', y para usar el Date y poder comparar, se necesita 'yyyy/mm/dd'
-    parseDate(dateString: string) {
-        // Divide la cadena de fecha en día, mes y año
-        const parts = dateString.split('/');
-        const day = parseInt(parts[0], 10);
-        const month = parseInt(parts[1], 10) - 1; // Los meses en JavaScript van de 0 a 11
-        const year = parseInt(parts[2], 10);
 
-        // Crea un nuevo objeto Date con los componentes descompuestos
-        return new Date(year, month, day);
-    }
-
-    validarPeriodo(desde: string, hasta: string) {
-        const fechaActual = new Date()
-        const fechaDesde = this.parseDate(desde)
-        const fechaHasta = this.parseDate(hasta)
-
-        const diferencia1 = fechaDesde.getTime() - fechaHasta.getTime()
-        const diferencia2 = fechaActual.getTime() - fechaDesde.getTime()
-
-
-        if (diferencia1 > 1 || diferencia2 < 1) {
-            console.log('Fechas invalidas')
-
-        } else {
-            console.log('Las fechas son validas')
+    validarPeriodo(desde:string, hasta:string) {
+        const fechaActual = new Date();
+        const fechaDesde = new Date(desde);
+        const fechaHasta = new Date(hasta);
+        if (fechaDesde > fechaHasta || fechaActual < fechaDesde || fechaActual < fechaHasta){
+          console.log('Fechas invalidas');
+        }else{
+          console.log('Las fechas son validas');
         }
-
-    }
+      }
 
     tomarTipoResena() {
         // guarda la var que le pasa el user a traves de la pantalla

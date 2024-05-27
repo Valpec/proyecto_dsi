@@ -1,7 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Usuario = void 0;
-class Usuario {
+export class Usuario {
+    contrasena;
+    nombre;
+    premium;
     // que tipo?????? poara la fechaHora
     constructor(contrasena, nombre, premium) {
         this.contrasena = contrasena;
@@ -15,4 +15,3 @@ class Usuario {
     mostrarNombre() {
     }
 }
-exports.Usuario = Usuario;

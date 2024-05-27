@@ -1,4 +1,4 @@
-import { GestorReporteRankingVinos } from "./gestorReporteRankingVinos";
+import { GestorReporteRankingVinos } from "./gestorReporteRankingVinos.js";
 export class Pantalla {
     private gestor: GestorReporteRankingVinos<any> ;
 

@@ -1,4 +1,4 @@
-import { RegionVitivinicola } from "./regionVitivinicola";
+import { RegionVitivinicola } from "./regionVitivinicola.js";
 export class Bodega {
 
     private coordenadasUbicacion: string[];

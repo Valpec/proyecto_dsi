@@ -1,13 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Pais = void 0;
-class Pais {
+export class Pais {
+    nombre;
+    provincias = [];
     // constructor(nombre: string, provincias: Provincia[]) {
     //     this.nombre = nombre;        
     //     this.provincias = provincias
     // }
     constructor(nombre) {
-        this.provincias = [];
         this.nombre = nombre;
     }
     establecerProvincia(provincia) {
@@ -20,4 +18,3 @@ class Pais {
         return this.nombre;
     }
 }
-exports.Pais = Pais;

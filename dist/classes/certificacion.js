@@ -1,7 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Certificacion = void 0;
-class Certificacion {
+export class Certificacion {
+    adjuntoURL;
+    descripcion;
+    fechaFin;
+    fechaInicio;
+    institucionOtorgante;
+    nombre;
     constructor(adjuntoURL, descripcion, fechaFin, fechaInicio, institucionOtorgante, nombre) {
         this.adjuntoURL = adjuntoURL;
         this.descripcion = descripcion;
@@ -17,4 +20,3 @@ class Certificacion {
     verAdjunto() {
     }
 }
-exports.Certificacion = Certificacion;

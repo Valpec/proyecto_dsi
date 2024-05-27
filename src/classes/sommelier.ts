@@ -1,5 +1,5 @@
-import { Usuario } from "./usuario";
-import { Resena } from "./resena";
+import { Usuario } from "./usuario.js";
+import { Resena } from "./resena.js";
 export class Sommelier {
 
     // que tipo?????? poara la fechaVal

@@ -1,12 +1,12 @@
-import { Maridaje } from "./classes/maridaje";
-import { Varietal } from "./classes/varietal";
-import { Vino } from "./classes/vino";
-import { TipoUva } from "./classes/tipoUva";
-import { Resena } from "./classes/resena";
-import { Bodega } from "./classes/bodega";
-import { RegionVitivinicola } from "./classes/regionVitivinicola";
-import { Pais } from "./classes/pais";
-import { Provincia } from "./classes/provincia";
+import { Maridaje } from "./classes/maridaje.js";
+import { Varietal } from "./classes/varietal.js";
+import { Vino } from "./classes/vino.js";
+import { TipoUva } from "./classes/tipoUva.js";
+import { Resena } from "./classes/resena.js";
+import { Bodega } from "./classes/bodega.js";
+import { RegionVitivinicola } from "./classes/regionVitivinicola.js";
+import { Pais } from "./classes/pais.js";
+import { Provincia } from "./classes/provincia.js";
 
 const descripcionesDeVinos: string[] = [
     "Un vino tinto con aromas intensos de frutas rojas y un toque de roble.",
@@ -140,6 +140,8 @@ export const crearResenaAleatoria = (vino:Vino) => {
     let frase = frasesResenas[fraseIndice];
     const miBooleano: boolean = booleanoAleatorio();
 
-    let resena = new Resena(frase, miBooleano, fechaResena, puntajeResena, vino)
+    // let resena = new Resena(frase, miBooleano, fechaResena, puntajeResena, vino)
+    let resena = new Resena(frase, miBooleano, fechaResena, puntajeResena)
+
     vino.agregarResena(resena)
 }

@@ -1,9 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.RegionVitivinicola = void 0;
-class RegionVitivinicola {
+export class RegionVitivinicola {
+    descripcion;
+    nombre;
+    provincia = null;
     constructor(descripcion, nombre) {
-        this.provincia = null;
         this.descripcion = descripcion;
         this.nombre = nombre;
     }
@@ -18,12 +17,9 @@ class RegionVitivinicola {
         return this.nombre;
     }
     obtenerProvincia() {
-        var _a;
-        return (_a = this.provincia) === null || _a === void 0 ? void 0 : _a.getNombre();
+        return this.provincia?.getNombre();
     }
     buscarPais() {
-        var _a;
-        return (_a = this.provincia) === null || _a === void 0 ? void 0 : _a.obtenerPais();
+        return this.provincia?.obtenerPais();
     }
 }
-exports.RegionVitivinicola = RegionVitivinicola;

@@ -1,5 +1,5 @@
-import { Pais } from "./pais";
-import { RegionVitivinicola } from "./regionVitivinicola";
+import { Pais } from "./pais.js";
+import { RegionVitivinicola } from "./regionVitivinicola.js";
 export class Provincia {
 
     private nombre: string;

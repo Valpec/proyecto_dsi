@@ -1,27 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const main_1 = require("../../main");
-// class Formulario{
-//     fechaDesde: string;
-//     fechaHasta: string;
-//     tipoResena: string;
-//     formaVisualizacion: string;
-//     constructor(fechaDesde: string, fechaHasta: string, tipoResena: string, formaVisualizacion: string){
-//         this.fechaDesde = fechaDesde
-//         this.fechaHasta = fechaHasta
-//         this.tipoResena = tipoResena
-//         this.formaVisualizacion = formaVisualizacion
-//         let confirmarBtn = document.getElementById('confirmar')
-//         confirmarBtn?.addEventListener('click', (e: Event) => {
-//             return Formulario.validacionFecha(this.fechaDesde, this.fechaHasta)
-//         });
-//     }
-//     public static validacionFecha(fechaDesde: string, fechaHasta: string){
-//         if (fechaDesde > fechaHasta) {
-//             alert('La Fecha Hasta no puede ser Menor a la Fecha Desde')
-//         } 
-//     }
-// }
+import { tomarConfirmacionGenerarReporte } from "../../main.js";
 function validacionFecha(fechaDesde, fechaHasta) {
     if (fechaDesde > fechaHasta) {
         alert('La Fecha Hasta no puede ser Menor a la Fecha Desde');
@@ -44,5 +21,5 @@ form.addEventListener('submit', function (e) {
         formaVisualizacion: formaVisualizacion
     };
     console.log(reporte);
-    (0, main_1.tomarConfirmacionGenerarReporte)(reporte);
+    tomarConfirmacionGenerarReporte(reporte);
 });

@@ -1,14 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Provincia = void 0;
-class Provincia {
+export class Provincia {
+    nombre;
+    regiones = [];
+    pais = null;
     // constructor(nombre: string, regiones: RegionVitivinicola[]) {
     //     this.nombre = nombre;  
     //     this.regiones = regiones      
     // }
     constructor(nombre) {
-        this.regiones = [];
-        this.pais = null;
         this.nombre = nombre;
     }
     contarRegiones() {
@@ -26,8 +24,6 @@ class Provincia {
         return this.nombre;
     }
     obtenerPais() {
-        var _a;
-        return (_a = this.pais) === null || _a === void 0 ? void 0 : _a.getNombre();
+        return this.pais?.getNombre();
     }
 }
-exports.Provincia = Provincia;

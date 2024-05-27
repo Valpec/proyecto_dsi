@@ -1,7 +1,7 @@
-import { Maridaje } from "./maridaje";
-import { Resena } from "./resena";
-import { Varietal } from "./varietal";
-import { Bodega } from "./bodega";
+import { Maridaje } from "./maridaje.js";
+import { Resena } from "./resena.js";
+import { Varietal } from "./varietal.js";
+import { Bodega } from "./bodega.js";
 export class Vino {
 
     private anada: number;
@@ -55,6 +55,8 @@ export class Vino {
         for(let i=0; i< this.resena.length; i ++){
             let esSommelier = this.resena[i].sosDeSommelier()
             let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
+            console.log('es de somm', esSommelier)
+            console.log('es de per', esDePeriodo)
 
             if(esSommelier && esDePeriodo){
                 let punt = this.resena[i].getPuntaje()

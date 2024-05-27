@@ -1,7 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Varietal = void 0;
-class Varietal {
+export class Varietal {
+    descripcion;
+    porcentajeComposicion;
+    tipoUva;
     constructor(descripcion, porcentajeComposicion, tipoUva) {
         this.descripcion = descripcion;
         this.porcentajeComposicion = porcentajeComposicion;
@@ -17,4 +17,3 @@ class Varietal {
         return this.descripcion;
     }
 }
-exports.Varietal = Varietal;

@@ -1,7 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CobroPremium = void 0;
-class CobroPremium {
+export class CobroPremium {
+    esAnual;
+    fechaPago;
+    monto;
+    nroOperacionMercadoPago;
     constructor(esAnual, fechaPago, monto, nroOperacionMercadoPago) {
         this.esAnual = esAnual;
         this.fechaPago = fechaPago;
@@ -9,4 +10,3 @@ class CobroPremium {
         this.nroOperacionMercadoPago = nroOperacionMercadoPago;
     }
 }
-exports.CobroPremium = CobroPremium;

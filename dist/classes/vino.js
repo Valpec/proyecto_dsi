@@ -1,10 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Vino = void 0;
-class Vino {
+export class Vino {
+    anada;
+    imagenEtiqueta;
+    nombre;
+    notaDeCataBodega;
+    precioArs;
+    maridaje;
+    resena = [];
+    // resena: Resena[] = []
+    varietal;
+    bodega;
     constructor(anada, imagenEtiqueta, nombre, notaDeCataBodega, precioArs, maridaje, varietal, bodega) {
-        // private resena: Resena[];
-        this.resena = [];
         this.anada = anada;
         this.imagenEtiqueta = imagenEtiqueta;
         this.nombre = nombre;
@@ -16,6 +21,7 @@ class Vino {
     }
     agregarResena(resenaNueva) {
         this.resena.push(resenaNueva);
+        resenaNueva.establecerVino(this);
     }
     mostrarResena(vinoPasado) {
         console.log(vinoPasado.resena);
@@ -39,6 +45,8 @@ class Vino {
         for (let i = 0; i < this.resena.length; i++) {
             let esSommelier = this.resena[i].sosDeSommelier();
             let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta);
+            console.log('es de somm', esSommelier);
+            console.log('es de per', esDePeriodo);
             if (esSommelier && esDePeriodo) {
                 let punt = this.resena[i].getPuntaje();
                 puntajes.push(punt);
@@ -72,4 +80,3 @@ class Vino {
         return puntajesGral;
     }
 }
-exports.Vino = Vino;

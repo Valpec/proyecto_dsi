@@ -1,7 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.NovedadEvento = void 0;
-class NovedadEvento {
+export class NovedadEvento {
+    codigoDescuentoPremium;
+    descipcion;
+    esSoloPremium;
+    // que tipo?????? poara la fechaHora
+    fechaHoraEvento;
+    nombreEvento;
     constructor(codigoDescuentoPremium, descipcion, esSoloPremium, fechaHoraEvento, nombreEvento) {
         this.codigoDescuentoPremium = codigoDescuentoPremium;
         this.descipcion = descipcion;
@@ -16,4 +19,3 @@ class NovedadEvento {
     mostrarDescripcion() {
     }
 }
-exports.NovedadEvento = NovedadEvento;

@@ -1,5 +1,5 @@
 // import { TipoUvatipoUva } from "./tipoUva";
-import { TipoUva } from "./tipoUva";
+import { TipoUva } from "./tipoUva.js";
 
 export class Varietal {
 

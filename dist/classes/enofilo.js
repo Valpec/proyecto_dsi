@@ -1,7 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Enofilo = void 0;
-class Enofilo {
+export class Enofilo {
+    apellido;
+    imagenPerfil;
+    nombre;
     constructor(apellido, imagenPerfil, nombre) {
         this.apellido = apellido;
         this.imagenPerfil = imagenPerfil;
@@ -12,4 +12,3 @@ class Enofilo {
     mostrarColeccionFavoritos() {
     }
 }
-exports.Enofilo = Enofilo;

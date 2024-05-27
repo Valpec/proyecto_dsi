@@ -1,15 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.crearResenaAleatoria = exports.crearVinosAutomaticos = void 0;
-const maridaje_1 = require("./classes/maridaje");
-const varietal_1 = require("./classes/varietal");
-const vino_1 = require("./classes/vino");
-const tipoUva_1 = require("./classes/tipoUva");
-const resena_1 = require("./classes/resena");
-const bodega_1 = require("./classes/bodega");
-const regionVitivinicola_1 = require("./classes/regionVitivinicola");
-const pais_1 = require("./classes/pais");
-const provincia_1 = require("./classes/provincia");
+import { Maridaje } from "./classes/maridaje.js";
+import { Varietal } from "./classes/varietal.js";
+import { Vino } from "./classes/vino.js";
+import { TipoUva } from "./classes/tipoUva.js";
+import { Resena } from "./classes/resena.js";
+import { Bodega } from "./classes/bodega.js";
+import { RegionVitivinicola } from "./classes/regionVitivinicola.js";
+import { Pais } from "./classes/pais.js";
+import { Provincia } from "./classes/provincia.js";
 const descripcionesDeVinos = [
     "Un vino tinto con aromas intensos de frutas rojas y un toque de roble.",
     "Este vino blanco destaca por sus notas cítricas y un final refrescante.",
@@ -48,14 +45,14 @@ function generarNumeroAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function crearBodega() {
-    let region = new regionVitivinicola_1.RegionVitivinicola("La tierra es roja", "Tierra");
+    let region = new RegionVitivinicola("La tierra es roja", "Tierra");
     // let provincia =  new Provincia('Cordoba', [region])
-    let provincia = new provincia_1.Provincia('Cordoba');
+    let provincia = new Provincia('Cordoba');
     provincia.establecerRegion(region);
     // let pais = new Pais('Argentina', [provincia])
-    let pais = new pais_1.Pais('Argentina');
+    let pais = new Pais('Argentina');
     pais.establecerProvincia(provincia);
-    let bodega = new bodega_1.Bodega([""], "Bodega rosita, Bodega familiar muy querida por los vecinos", "Fundada en 100 A.C", "Mira que vino", "1900/12/13", region);
+    let bodega = new Bodega([""], "Bodega rosita, Bodega familiar muy querida por los vecinos", "Fundada en 100 A.C", "Mira que vino", "1900/12/13", region);
     return bodega;
 }
 let vinos = [];
@@ -63,11 +60,11 @@ function generarMaridajeAleatorio() {
     let maridaje = [];
     let indice = generarNumeroAleatorio(0, maridajes.length - 1);
     let maridajeSeleccionado = maridajes[indice];
-    let creado = new maridaje_1.Maridaje(maridajeSeleccionado.descripcion, maridajeSeleccionado.nombre);
+    let creado = new Maridaje(maridajeSeleccionado.descripcion, maridajeSeleccionado.nombre);
     maridaje.push(creado);
     return maridaje;
 }
-const crearVinosAutomaticos = (cantidad) => {
+export const crearVinosAutomaticos = (cantidad) => {
     for (let i = 0; i < cantidad; i++) {
         let anada = generarNumeroAleatorio(1840, 2024);
         let descripcionIndice = generarNumeroAleatorio(0, descripcionesDeVinos.length - 1);
@@ -76,16 +73,15 @@ const crearVinosAutomaticos = (cantidad) => {
         let maridaje = generarMaridajeAleatorio();
         let precio = generarNumeroAleatorio(50, 1000);
         let varietal = [
-            new varietal_1.Varietal('rico', 90, new tipoUva_1.TipoUva('cordobesa', 'lila')),
-            new varietal_1.Varietal('suave', 85, new tipoUva_1.TipoUva('mendocina', 'malbec'))
+            new Varietal('rico', 90, new TipoUva('cordobesa', 'lila')),
+            new Varietal('suave', 85, new TipoUva('mendocina', 'malbec'))
         ];
         let bodega = crearBodega();
-        let vino = new vino_1.Vino(anada, "", nombre, notaCataBodega, precio, maridaje, varietal, bodega);
+        let vino = new Vino(anada, "", nombre, notaCataBodega, precio, maridaje, varietal, bodega);
         vinos.push(vino);
     }
     return vinos;
 };
-exports.crearVinosAutomaticos = crearVinosAutomaticos;
 function booleanoAleatorio() {
     return Math.random() < 0.5; // Devuelve true si el numero aleatorio es menor que 0.5, de lo contrario devuelve false
 }
@@ -114,7 +110,7 @@ const frasesResenas = [
 ];
 // const tipoResena = ['Amigos', 'Sommelier', 'Normal']
 // Ejemplo de uso:
-const crearResenaAleatoria = (vino) => {
+export const crearResenaAleatoria = (vino) => {
     let ano = generarNumeroAleatorio(2013, 2024);
     let mes = generarNumeroAleatorio(1, 12);
     let dia = generarNumeroAleatorio(1, 31);
@@ -123,7 +119,7 @@ const crearResenaAleatoria = (vino) => {
     let fraseIndice = generarNumeroAleatorio(0, frasesResenas.length - 1);
     let frase = frasesResenas[fraseIndice];
     const miBooleano = booleanoAleatorio();
-    let resena = new resena_1.Resena(frase, miBooleano, fechaResena, puntajeResena, vino);
+    // let resena = new Resena(frase, miBooleano, fechaResena, puntajeResena, vino)
+    let resena = new Resena(frase, miBooleano, fechaResena, puntajeResena);
     vino.agregarResena(resena);
 };
-exports.crearResenaAleatoria = crearResenaAleatoria;

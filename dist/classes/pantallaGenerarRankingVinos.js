@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Pantalla = void 0;
-class Pantalla {
+export class Pantalla {
+    gestor;
     constructor(gestor) {
         this.gestor = gestor;
     }
@@ -31,4 +29,3 @@ class Pantalla {
     informarGeneracion() {
     }
 }
-exports.Pantalla = Pantalla;

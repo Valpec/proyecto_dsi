@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Maridaje = void 0;
-class Maridaje {
+export class Maridaje {
+    descripcion;
+    nombre;
     constructor(descripcion, nombre) {
         this.descripcion = descripcion;
         this.nombre = nombre;
@@ -9,4 +8,3 @@ class Maridaje {
     maridaConVino() {
     }
 }
-exports.Maridaje = Maridaje;

@@ -1,7 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Sommelier = void 0;
-class Sommelier {
+export class Sommelier {
+    // que tipo?????? poara la fechaVal
+    fechaValidacion;
+    nombre;
+    notaPresentacion;
+    usuario;
+    resena;
     constructor(fechaValidacion, nombre, notaPresentacion, usuario, resena) {
         this.fechaValidacion = fechaValidacion;
         this.nombre = nombre;
@@ -14,4 +17,3 @@ class Sommelier {
     validarSommelier() {
     }
 }
-exports.Sommelier = Sommelier;

@@ -1,13 +1,18 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Resena = void 0;
-class Resena {
+export class Resena {
+    comentario;
+    // por tema de que coincide con el metodo, renombramos a esPremium
+    premium;
+    fechaResena;
+    puntaje;
+    vino = null;
     // que tipo?????? poara la fechaHora
-    constructor(comentario, premium, fechaResena, puntaje, vino) {
+    constructor(comentario, premium, fechaResena, puntaje) {
         this.comentario = comentario;
         this.premium = premium;
         this.fechaResena = fechaResena;
         this.puntaje = puntaje;
+    }
+    establecerVino(vino) {
         this.vino = vino;
     }
     esPremium() {
@@ -27,10 +32,19 @@ class Resena {
             return false;
         }
     }
+    parseDate(dateString) {
+        // Divide la cadena de fecha en día, mes y año
+        const parts = dateString.split('/');
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1; // Los meses en JavaScript van de 0 a 11
+        const year = parseInt(parts[2], 10);
+        // Crea un nuevo objeto Date con los componentes descompuestos
+        return new Date(year, month, day);
+    }
     esEnPeriodoFecha(desde, hasta) {
         const fecha = new Date(this.fechaResena);
-        const desdeEnDate = new Date(desde);
-        const hastaEnDate = new Date(hasta);
+        const desdeEnDate = this.parseDate(desde);
+        const hastaEnDate = this.parseDate(hasta);
         if (fecha >= desdeEnDate && fecha <= hastaEnDate) {
             return true;
         }
@@ -39,4 +53,3 @@ class Resena {
         }
     }
 }
-exports.Resena = Resena;

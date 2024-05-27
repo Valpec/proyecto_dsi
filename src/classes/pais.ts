@@ -1,4 +1,4 @@
-import { Provincia } from "./provincia";
+import { Provincia } from "./provincia.js";
 export class Pais {
 
     private nombre: string;

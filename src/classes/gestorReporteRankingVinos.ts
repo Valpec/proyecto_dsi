@@ -1,5 +1,5 @@
-import { Reporte } from "../main";
-import { Vino } from "./vino";
+import { Reporte } from "../main.js";
+import { Vino } from "./vino.js";
 
 // contrato de la estructura que se devuelve de los vinos con los datos necesarios para mostrarlo en pantalla/excel
 export interface VinoEncontrado {
@@ -64,12 +64,14 @@ export class GestorReporteRankingVinos<T> {
 
     buscarVinosEnPeriodoConResenas(desde: string, hasta: string, tipoResena: string, vinos: Vino[]) {
         let vinosEncontrados: VinoEncontrado[] = []
-
+        console.log(JSON.stringify(vinosEncontrados))
         for (let i = 0; i < vinos.length; i++) {
+            console.log('fechas', desde, hasta)
             let puntajes = vinos[i].conocerResenasEnPeriodo(desde, hasta)
             if (puntajes.length === 0) {
                 console.error('No hay resenas de someelier en el periodo indicado, para el vino seleccionado')
             }
+            console.log('lso putnajes', puntajes)
             // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html
             // DEBERIA !!!! PERO ZZZZZZ
             // if(tipoResena === '1'){
@@ -87,7 +89,10 @@ export class GestorReporteRankingVinos<T> {
             //VER, creo que daria problema el asignar con el indicice si es que hay sin puntaje.
             const datosVino = { nombreVino, promedioSomm, precioSugeridoVino, datosBodega, varietales }
             vinosEncontrados[i] = datosVino
+
         }
+        console.log(JSON.stringify(vinosEncontrados))
+
         return vinosEncontrados
     }
 

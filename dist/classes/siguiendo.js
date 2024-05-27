@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Siguiendo = void 0;
-class Siguiendo {
+export class Siguiendo {
+    fechaInicio;
+    fechaFin;
     // que tipo?????? poara la fechaHora
     constructor(fechaInicio, fechaFin, premium) {
         this.fechaInicio = fechaInicio;
@@ -14,4 +13,3 @@ class Siguiendo {
     sosDeSommelier() {
     }
 }
-exports.Siguiendo = Siguiendo;

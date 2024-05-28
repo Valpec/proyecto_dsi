@@ -6,7 +6,6 @@ export class Vino {
     precioArs;
     maridaje;
     resena = [];
-    // resena: Resena[] = []
     varietal;
     bodega;
     constructor(anada, imagenEtiqueta, nombre, notaDeCataBodega, precioArs, maridaje, varietal, bodega) {

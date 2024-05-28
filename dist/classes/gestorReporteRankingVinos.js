@@ -27,7 +27,9 @@ export class GestorReporteRankingVinos {
         // se supone que toma el tipo de visualizacion
     }
     tomarConfirmacionGenerarReporte(datosReporte, vinosArray) {
-        this.buscarVinosEnPeriodoConResenas(datosReporte.fechaDesde, datosReporte.fechaHasta, datosReporte.tipoResena, vinosArray);
+        const vinosEncontrados = this.buscarVinosEnPeriodoConResenas(datosReporte.fechaDesde, datosReporte.fechaHasta, datosReporte.tipoResena, vinosArray);
+        const topDiez = this.ordenarVinosPorCalificacion(vinosEncontrados);
+        return topDiez;
     }
     buscarVinosEnPeriodoConResenas(desde, hasta, tipoResena, vinos) {
         let vinosEncontrados = [];

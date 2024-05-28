@@ -1,4 +1,4 @@
-import { tomarConfirmacionGenerarReporte } from "../../pantallaGenerarRankingVinos.js";
+import { tomarConfirmacionGenerarReporte } from "../../main.js";
 function validacionFecha(fechaDesde, fechaHasta) {
     if (fechaDesde > fechaHasta) {
         alert('La Fecha Hasta no puede ser Menor a la Fecha Desde');

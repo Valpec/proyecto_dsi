@@ -1,4 +1,4 @@
-import { Reporte } from "../pantallaGenerarRankingVinos.js";
+import { Reporte } from "../main.js";
 import { Vino } from "./vino.js";
 
 // contrato de la estructura que se devuelve de los vinos con los datos necesarios para mostrarlo en pantalla/excel

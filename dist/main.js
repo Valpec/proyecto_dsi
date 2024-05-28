@@ -9,7 +9,8 @@ let gestorReporte = new GestorReporteRankingVinos(vinosArray);
 // let pantalla = new Pantalla(gestorReporte)
 export function tomarConfirmacionGenerarReporte(reporte) {
     let datosReporte = reporte;
-    gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    return topDiez;
 }
 ;
 export function informarGeneracion(vinos) {

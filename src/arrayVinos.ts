@@ -138,12 +138,22 @@ const vino_cuatro: Vino = new Vino(
   );
 // Crear más vinos y reseñas de manera similar...
 
-const resena_uno:Resena = new Resena("Una opción perfecta para celebraciones.", true, "10/10/2018", 10)
-const resena_dos: Resena = new Resena("Un vino perfecto para una tarde de verano.", true, "05/06/2019", 9);
-const resena_tres: Resena = new Resena("Un vino que sorprende por su equilibrio y complejidad.", true, "12/10/2020", 9.5);
-const resena_cuatro: Resena = new Resena("Un vino con una relación calidad-precio excepcional.", true, "07/04/2021", 9);
-const resena_diez: Resena = new Resena("Un vino con cuerpo y carácter, ideal para maridar con platos de carne roja.", true, "20/11/2021", 8.5);
-const resena_once: Resena = new Resena("Un vino joven y fresco, perfecto para reuniones informales.", true, "08/03/2022", 8);
+const resena_uno: Resena = new Resena("Una opción perfecta para celebraciones.", true, "2018-10-10", 10);
+const resena_dos: Resena = new Resena("Un vino perfecto para una tarde de verano.", true, "2019-06-05", 9);
+const resena_tres: Resena = new Resena("Un vino que sorprende por su equilibrio y complejidad.", true, "2020-10-12", 9.5);
+const resena_cuatro: Resena = new Resena("Un vino con una relación calidad-precio excepcional.", true, "2021-04-07", 9);
+const resena_diez: Resena = new Resena("Un vino con cuerpo y carácter, ideal para maridar con platos de carne roja.", true, "2021-11-20", 8.5);
+const resena_once: Resena = new Resena("Un vino joven y fresco, perfecto para reuniones informales.", true, "2022-03-08", 8);
+
+const resena_cinco: Resena = new Resena("Un vino con un bouquet aromático excepcional y un final largo y seductor.", true, "2023-07-15", 9.8);
+const resena_seis: Resena = new Resena("Un vino que cautiva con su elegancia y sutileza, perfecto para ocasiones especiales.", true, "2023-11-28", 9.7);
+const resena_siete: Resena = new Resena("Un vino que destaca por su frescura y versatilidad, ideal para maridar con una amplia variedad de platos.", true, "2024-02-10", 9.3);
+const resena_ocho: Resena = new Resena("Un vino con una expresión frutal encantadora y una textura sedosa en boca.", false, "2024-05-05", 9.6);
+const resena_nueve: Resena = new Resena("Un vino complejo y estructurado que revela su carácter con cada sorbo.", true, "2024-08-20", 9.9);
+const resena_doce: Resena = new Resena("Un vino que sorprende por su armonía y elegancia, una joya enológica.", true, "2024-11-15", 9.8);
+
+
+
 vino_cinco.agregarResena(resena_once);
 vino_cuatro.agregarResena(resena_tres);
 vino_uno.agregarResena(resena_uno)
@@ -151,12 +161,7 @@ vino_dos.agregarResena(resena_dos);
 vino_ocho.agregarResena(resena_cuatro);
 vino_tres.agregarResena(resena_diez);
 
-const resena_cinco: Resena = new Resena("Un vino con un bouquet aromático excepcional y un final largo y seductor.", true, "15/07/2023", 9.8);
-const resena_seis: Resena = new Resena("Un vino que cautiva con su elegancia y sutileza, perfecto para ocasiones especiales.", true, "28/11/2023", 9.7);
-const resena_siete: Resena = new Resena("Un vino que destaca por su frescura y versatilidad, ideal para maridar con una amplia variedad de platos.", true, "10/02/2024", 9.3);
-const resena_ocho: Resena = new Resena("Un vino con una expresión frutal encantadora y una textura sedosa en boca.", false, "05/05/2024", 9.6);
-const resena_nueve: Resena = new Resena("Un vino complejo y estructurado que revela su carácter con cada sorbo.", true, "20/08/2024", 9.9);
-const resena_doce: Resena = new Resena("Un vino que sorprende por su armonía y elegancia, una joya enológica.", true, "15/11/2024", 9.8);
+
 
 vino_cinco.agregarResena(resena_cinco);
 vino_seis.agregarResena(resena_seis);

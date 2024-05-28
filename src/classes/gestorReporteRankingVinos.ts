@@ -1,10 +1,11 @@
-import { Reporte } from "../main.js";
+import { Reporte } from "../pantallaGenerarRankingVinos.js";
 import { Vino } from "./vino.js";
 
 // contrato de la estructura que se devuelve de los vinos con los datos necesarios para mostrarlo en pantalla/excel
 export interface VinoEncontrado {
     nombreVino: string;
     promedioSomm: number;
+    promedioGral: number;
     precioSugeridoVino: number;
     datosBodega: object;
     varietales: string[];
@@ -42,35 +43,44 @@ export class GestorReporteRankingVinos<T> {
         // se supone que toma el tipo de visualizacion
     }
     tomarConfirmacionGenerarReporte(datosReporte:Reporte, vinosArray:Vino[]) {
-        this.buscarVinosEnPeriodoConResenas(datosReporte.fechaDesde, datosReporte.fechaHasta, datosReporte.tipoResena, vinosArray)
+        const vinosEncontrados =   this.buscarVinosEnPeriodoConResenas(datosReporte.fechaDesde, datosReporte.fechaHasta, datosReporte.tipoResena, vinosArray)
+        const topDiez = this.ordenarVinosPorCalificacion(vinosEncontrados)
+        return topDiez
     }
 
     buscarVinosEnPeriodoConResenas(desde: string, hasta: string, tipoResena: string, vinos: Vino[]) {
         let vinosEncontrados: VinoEncontrado[] = []
         console.log(JSON.stringify(vinosEncontrados))
+
         for (let i = 0; i < vinos.length; i++) {
             console.log('fechas', desde, hasta)
             let puntajes = vinos[i].conocerResenasEnPeriodo(desde, hasta)
+            let puntajesGrales = vinos[i].conocerResenasEnPeriodoGral(desde, hasta)
             if (puntajes.length === 0) {
                 console.error('No hay resenas de someelier en el periodo indicado, para el vino seleccionado')
             }
             console.log('lso putnajes', puntajes)
-            // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html
-            // DEBERIA !!!! PERO ZZZZZZ
+            // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html VER
             // if(tipoResena === '1'){
                 const promedioSomm = this.calcularPromCalificacionPorSommelier(puntajes)
             // }
+            const promedioGral = this.calcularPromCalificacionGeneral(puntajesGrales)
+            console.log(promedioSomm)
 
             const nombreVino = vinos[i].getNombre()
             const precioSugeridoVino = vinos[i].getPrecioSugerido()
 
             const datosBodega = vinos[i].buscarDatosBodega()
+            if(!datosBodega){
+                // hacer un alert que 
+                // noSeEncuentranBodegasRegistradas()
+            }
             // estructura ---> {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
             const varietales = vinos[i].buscarVarietal()
             // estructura --->[desc1, desc2, desc3]
 
             //VER, creo que daria problema el asignar con el indicice si es que hay sin puntaje.
-            const datosVino = { nombreVino, promedioSomm, precioSugeridoVino, datosBodega, varietales }
+            const datosVino = { nombreVino, promedioSomm,promedioGral, precioSugeridoVino, datosBodega, varietales }
             vinosEncontrados[i] = datosVino
 
         }
@@ -82,6 +92,8 @@ export class GestorReporteRankingVinos<T> {
     calcularPromCalificacionPorSommelier(puntajes: number[]) {
         let sumatoria = puntajes.reduce((sum, current) => sum + current, 0)
         let promedio = sumatoria / puntajes.length
+        // console.log('sumatoria',sumatoria)
+        // console.log('puntajes',puntajes.length)
         return promedio
     }
 
@@ -92,10 +104,32 @@ export class GestorReporteRankingVinos<T> {
         return topDiez
     }
 
+    calcularPromCalificacionGeneral(puntajesGral:number[]){
+        let sumatoria = puntajesGral.reduce((sum, current) => sum + current, 0)
+        let promedio = sumatoria / puntajesGral.length
+        // console.log('sumatoria',sumatoria)
+        // console.log('puntajes',puntajes.length)
+        return promedio
+    }
     // DEBERIA HACER LA BUSQUEDA DE LA CALIFICACION POR GENERAL< NO SOMMELIER???????? VER
     generarReporte() {
         // deberia haber un metodo de generarReporteTop10 de la pantalla del excel
                     
     }
 
+    // ALTERNATIVA UNO
+    tomarCancelacionGenerarReporte(){
+
+    }
+    registrarCancelacion(){
+
+    }
+
+      // ALTERNATIVA DOS
+    informarSituacion(){
+
+    }
+    tomarConfirmacionDeLectura(){
+        this.registrarCancelacion()
+    }
 }

@@ -1,4 +1,4 @@
-import { tomarConfirmacionGenerarReporte, Reporte } from "../../main.js";
+import { tomarConfirmacionGenerarReporte, Reporte } from "../../pantallaGenerarRankingVinos.js";
 
 
 function validacionFecha(fechaDesde: string, fechaHasta: string){

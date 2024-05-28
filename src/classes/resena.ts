@@ -46,7 +46,7 @@ export class Resena {
         const fecha = new Date(this.fechaResena)
         const desdeEnDate = new Date(desde)
         const hastaEnDate = new Date(hasta)
-
+        console.log(fecha, desdeEnDate, hastaEnDate)
         if(fecha >= desdeEnDate && fecha <= hastaEnDate){
             return true
         }else{

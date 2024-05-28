@@ -11,7 +11,6 @@ export class Vino {
     private precioArs: number;
     private maridaje: Maridaje[];
     private resena: Resena[] = [];
-    // resena: Resena[] = []
     private varietal: Varietal[]
     private bodega: Bodega
 
@@ -59,6 +58,19 @@ export class Vino {
             console.log('es de per', esDePeriodo)
 
             if(esSommelier && esDePeriodo){
+                let punt = this.resena[i].getPuntaje()
+                puntajes.push(punt)
+            }
+        }
+        return puntajes
+    }
+    conocerResenasEnPeriodoGral(desde:string, hasta:string){
+        let puntajes = []
+        for(let i=0; i< this.resena.length; i ++){
+            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
+            console.log('es de per', esDePeriodo)
+
+            if(esDePeriodo){
                 let punt = this.resena[i].getPuntaje()
                 puntajes.push(punt)
             }

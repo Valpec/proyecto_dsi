@@ -9,22 +9,11 @@ export class GestorReporteRankingVinos {
         // quisiera impleemntar aca un window.replace, como para decir que hace algo, pero sinceramente descnozco que tanto romperia la cabeza hacer eso
     }
     // las funciones parseDate y validar periodo son porque la fecha ingresada es en formato 'dd/mm/yyyy', y para usar el Date y poder comparar, se necesita 'yyyy/mm/dd'
-    parseDate(dateString) {
-        // Divide la cadena de fecha en día, mes y año
-        const parts = dateString.split('/');
-        const day = parseInt(parts[0], 10);
-        const month = parseInt(parts[1], 10) - 1; // Los meses en JavaScript van de 0 a 11
-        const year = parseInt(parts[2], 10);
-        // Crea un nuevo objeto Date con los componentes descompuestos
-        return new Date(year, month, day);
-    }
     validarPeriodo(desde, hasta) {
         const fechaActual = new Date();
-        const fechaDesde = this.parseDate(desde);
-        const fechaHasta = this.parseDate(hasta);
-        const diferencia1 = fechaDesde.getTime() - fechaHasta.getTime();
-        const diferencia2 = fechaActual.getTime() - fechaDesde.getTime();
-        if (diferencia1 > 1 || diferencia2 < 1) {
+        const fechaDesde = new Date(desde);
+        const fechaHasta = new Date(hasta);
+        if (fechaDesde > fechaHasta || fechaActual < fechaDesde || fechaActual < fechaHasta) {
             console.log('Fechas invalidas');
         }
         else {
@@ -46,23 +35,29 @@ export class GestorReporteRankingVinos {
         for (let i = 0; i < vinos.length; i++) {
             console.log('fechas', desde, hasta);
             let puntajes = vinos[i].conocerResenasEnPeriodo(desde, hasta);
+            let puntajesGrales = vinos[i].conocerResenasEnPeriodoGral(desde, hasta);
             if (puntajes.length === 0) {
                 console.error('No hay resenas de someelier en el periodo indicado, para el vino seleccionado');
             }
             console.log('lso putnajes', puntajes);
-            // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html
-            // DEBERIA !!!! PERO ZZZZZZ
+            // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html VER
             // if(tipoResena === '1'){
             const promedioSomm = this.calcularPromCalificacionPorSommelier(puntajes);
             // }
+            const promedioGral = this.calcularPromCalificacionGeneral(puntajesGrales);
+            console.log(promedioSomm);
             const nombreVino = vinos[i].getNombre();
             const precioSugeridoVino = vinos[i].getPrecioSugerido();
             const datosBodega = vinos[i].buscarDatosBodega();
+            if (!datosBodega) {
+                // hacer un alert que 
+                // noSeEncuentranBodegasRegistradas()
+            }
             // estructura ---> {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
             const varietales = vinos[i].buscarVarietal();
             // estructura --->[desc1, desc2, desc3]
             //VER, creo que daria problema el asignar con el indicice si es que hay sin puntaje.
-            const datosVino = { nombreVino, promedioSomm, precioSugeridoVino, datosBodega, varietales };
+            const datosVino = { nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales };
             vinosEncontrados[i] = datosVino;
         }
         console.log(JSON.stringify(vinosEncontrados));
@@ -71,6 +66,8 @@ export class GestorReporteRankingVinos {
     calcularPromCalificacionPorSommelier(puntajes) {
         let sumatoria = puntajes.reduce((sum, current) => sum + current, 0);
         let promedio = sumatoria / puntajes.length;
+        // console.log('sumatoria',sumatoria)
+        // console.log('puntajes',puntajes.length)
         return promedio;
     }
     ordenarVinosPorCalificacion(vinosEncontrados) {
@@ -79,8 +76,26 @@ export class GestorReporteRankingVinos {
         let topDiez = vinosOrdenados.splice(0, 10);
         return topDiez;
     }
+    calcularPromCalificacionGeneral(puntajesGral) {
+        let sumatoria = puntajesGral.reduce((sum, current) => sum + current, 0);
+        let promedio = sumatoria / puntajesGral.length;
+        // console.log('sumatoria',sumatoria)
+        // console.log('puntajes',puntajes.length)
+        return promedio;
+    }
     // DEBERIA HACER LA BUSQUEDA DE LA CALIFICACION POR GENERAL< NO SOMMELIER???????? VER
     generarReporte() {
         // deberia haber un metodo de generarReporteTop10 de la pantalla del excel
+    }
+    // ALTERNATIVA UNO
+    tomarCancelacionGenerarReporte() {
+    }
+    registrarCancelacion() {
+    }
+    // ALTERNATIVA DOS
+    informarSituacion() {
+    }
+    tomarConfirmacionDeLectura() {
+        this.registrarCancelacion();
     }
 }

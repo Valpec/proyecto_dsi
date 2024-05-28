@@ -1,10 +1,9 @@
-import { tomarConfirmacionGenerarReporte } from "../../main.js";
+import { tomarConfirmacionGenerarReporte } from "../../pantallaGenerarRankingVinos.js";
 function validacionFecha(fechaDesde, fechaHasta) {
     if (fechaDesde > fechaHasta) {
         alert('La Fecha Hasta no puede ser Menor a la Fecha Desde');
     }
 }
-// const botonConfirmar = document.getElementById('confirmarGeneracionReporte')!
 const form = document.getElementById('reporteForm');
 form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -22,4 +21,41 @@ form.addEventListener('submit', function (e) {
     };
     console.log(reporte);
     tomarConfirmacionGenerarReporte(reporte);
+    //     const tablaContainer = document.getElementById('tablaVinos');
+    //     let tablaHTML = '<table class="table table-striped">';
+    //     tablaHTML += `
+    //         <thead>
+    //             <tr>
+    //                 <th>Nombre</th>
+    //                 <th>Calificación</th>
+    //                 <th>Sommelier</th>
+    //                 <th>Precio</th>
+    //                 <th>Bodega</th>
+    //                 <th>Varietal</th>
+    //                 <th>Región</th>
+    //                 <th>País</th>
+    //                 <th>Fecha</th>
+    //             </tr>
+    //         </thead>
+    //         <tbody>
+    //     `;
+    //     vinosFiltrados.forEach(vino => {
+    //         tablaHTML += `
+    //             <tr>
+    //                 <td>${vino.nombre}</td>
+    //                 <td>${vino.calificacion}</td>
+    //                 <td>${vino.esSommelier ? 'Sí' : 'No'}</td>
+    //                 <td>${vino.precio}</td>
+    //                 <td>${vino.bodega}</td>
+    //                 <td>${vino.varietal.join(', ')}</td>
+    //                 <td>${vino.region}</td>
+    //                 <td>${vino.pais}</td>
+    //                 <td>${vino.fecha}</td>
+    //             </tr>
+    //         `;
+    //     });
+    //     tablaHTML += '</tbody></table>';
+    //     tablaContainer.innerHTML = tablaHTML;
+    //     // Log para verificar que la tabla se ha generado
+    //     console.log('Tabla generada:', tablaHTML);
 });

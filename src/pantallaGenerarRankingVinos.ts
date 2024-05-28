@@ -1,7 +1,7 @@
 // import { crearVinosAutomaticos, crearResenaAleatoria} from "./crearVinos";
 
 import { GestorReporteRankingVinos , VinoEncontrado} from "./classes/gestorReporteRankingVinos.js"
-import { Pantalla } from "./classes/pantallaGenerarRankingVinos.js"
+import { Pantalla } from "./classes/pantalla.js"
 import { Vino } from "./classes/vino.js";
 
 import { vinosArray } from "./arrayVinos.js";
@@ -25,7 +25,8 @@ let gestorReporte = new GestorReporteRankingVinos(vinosArray)
 
 export function tomarConfirmacionGenerarReporte(reporte:Reporte){
     let datosReporte = reporte
-    gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    return topDiez
 };
 
 export function informarGeneracion(vinos:VinoEncontrado[]){

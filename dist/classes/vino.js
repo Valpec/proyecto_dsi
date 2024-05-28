@@ -54,6 +54,18 @@ export class Vino {
         }
         return puntajes;
     }
+    conocerResenasEnPeriodoGral(desde, hasta) {
+        let puntajes = [];
+        for (let i = 0; i < this.resena.length; i++) {
+            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta);
+            console.log('es de per', esDePeriodo);
+            if (esDePeriodo) {
+                let punt = this.resena[i].getPuntaje();
+                puntajes.push(punt);
+            }
+        }
+        return puntajes;
+    }
     buscarDatosBodega() {
         const nombreBodega = this.bodega.getNombre();
         // el regionProvPais es un obtejo

@@ -116,7 +116,7 @@ export class GestorReporteRankingVinos<T> {
 
     // ALTERNATIVA UNO
     tomarCancelacionGenerarReporte(){
-
+        
     }
     registrarCancelacion(){
 

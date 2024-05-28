@@ -34,7 +34,6 @@ export class GestorReporteRankingVinos {
         let vinosEncontrados = [];
         console.log(JSON.stringify(vinosEncontrados));
         for (let i = 0; i < vinos.length; i++) {
-            console.log('fechas', desde, hasta);
             // la variable puntajes es de los sommelier. El puntaje gral, de los somm, amigos, normal
             let puntajes = vinos[i].conocerResenasEnPeriodo(desde, hasta);
             let puntajesGrales = vinos[i].conocerResenasEnPeriodoGral(desde, hasta);
@@ -42,13 +41,11 @@ export class GestorReporteRankingVinos {
                 console.error('no se encontraron vinos para el periodo seleccionado');
                 continue;
             }
-            console.log('lso putnajes', puntajes);
             // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html VER
             // if(tipoResena === '1'){
             const promedioSomm = this.calcularPromCalificacionPorSommelier(puntajes);
             // }
             const promedioGral = this.calcularPromCalificacionGeneral(puntajesGrales);
-            console.log(promedioSomm);
             const nombreVino = vinos[i].getNombre();
             const precioSugeridoVino = vinos[i].getPrecioSugerido();
             const datosBodega = vinos[i].buscarDatosBodega();
@@ -79,6 +76,7 @@ export class GestorReporteRankingVinos {
     }
     ordenarVinosPorCalificacion(vinosEncontrados) {
         let vinosOrdenados = vinosEncontrados.sort((a, b) => b.promedioSomm - a.promedioSomm);
+        console.log('vinosOrdenados', vinosOrdenados.length);
         let topDiez = vinosOrdenados.splice(0, 10);
         return topDiez;
     }

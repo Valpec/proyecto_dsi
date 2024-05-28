@@ -8,6 +8,28 @@ import { RegionVitivinicola } from "./classes/regionVitivinicola.js";
 import { Pais } from "./classes/pais.js";
 import { Provincia } from "./classes/provincia.js";
 
+
+const pais_uno = new Pais('Argentina')
+
+const provincia_uno = new Provincia('Cordoba')
+const provincia_dos = new Provincia('Mendoza')
+provincia_uno.establecerPais(pais_uno)
+provincia_dos.establecerPais(pais_uno)
+
+const region_uno = new RegionVitivinicola("descripcion", "Región 1")
+const region_dos = new RegionVitivinicola("descripcion", "Región 2")
+const region_tres = new RegionVitivinicola("descripcion", "Región 3")
+const region_cuatro = new RegionVitivinicola("descripcion", "Región 4")
+const region_cinco = new RegionVitivinicola("descripcion", "Región 5")
+
+region_uno.establecerProvincia(provincia_dos)
+region_dos.establecerProvincia(provincia_uno)
+region_tres.establecerProvincia(provincia_uno)
+region_cuatro.establecerProvincia(provincia_uno)
+region_cinco.establecerProvincia(provincia_dos)
+
+
+
 const maridaje_uno = new Maridaje( "Un acompañamiento clásico con una variedad de quesos y embutidos.", "Quesos y Embutidos")
 const maridaje_dos = new Maridaje( "Un acompañamiento clásico ", "Quesos ")
 const maridaje_tres = new Maridaje("Perfecto para una cena elegante con carne asada.", "Carne Asada");
@@ -33,7 +55,7 @@ const varietal_diez = new Varietal("aromático", 35, new TipoUva("Uva aromática
 const varietal_once = new Varietal("exótico", 45, new TipoUva("Uva exótica", "Uva"));
 
 
-const vino_uno:Vino = new Vino(1931, "", "Vino 1", "Un vino tinto con aromas intensos de frutas rojas y un toque de roble", 524,[maridaje_dos, maridaje_uno] , [varietal_uno], new Bodega(["coordenadas"], "Mira que vino" , "historia", "nombre", "12/05/2020", new RegionVitivinicola("descripcion", "Region 1")))
+const vino_uno:Vino = new Vino(1931, "", "Vino 1", "Un vino tinto con aromas intensos de frutas rojas y un toque de roble", 524,[maridaje_dos, maridaje_uno] , [varietal_uno], new Bodega(["coordenadas"], "Mira que vino" , "historia", "nombre", "12/05/2020",region_uno))
 const vino_dos: Vino = new Vino(
   1950,
   "",
@@ -42,7 +64,7 @@ const vino_dos: Vino = new Vino(
   450,
   [maridaje_tres, maridaje_cuatro],
   [varietal_tres],
-  new Bodega(["coordenadas"], "Bodega A", "historia", "nombre", "05/03/2019", new RegionVitivinicola("descripcion", "Región 2"))
+  new Bodega(["coordenadas"], "Bodega A", "historia", "nombre", "05/03/2019", region_dos)
 );
 
 const vino_tres: Vino = new Vino(
@@ -53,7 +75,7 @@ const vino_tres: Vino = new Vino(
   375,
   [maridaje_cuatro],
   [varietal_cuatro],
-  new Bodega(["coordenadas"], "Bodega B", "historia", "nombre", "15/09/2015", new RegionVitivinicola("descripcion", "Región 3"))
+  new Bodega(["coordenadas"], "Bodega B", "historia", "nombre", "15/09/2015", region_dos)
 );
 const vino_cuatro: Vino = new Vino(
     1960,
@@ -63,7 +85,7 @@ const vino_cuatro: Vino = new Vino(
     600,
     [maridaje_seis],
     [varietal_seis],
-    new Bodega(["coordenadas"], "Bodega C", "historia", "nombre", "25/08/2018", new RegionVitivinicola("descripcion", "Región 4"))
+    new Bodega(["coordenadas"], "Bodega C", "historia", "nombre", "25/08/2018", region_uno)
   );
   
   const vino_cinco: Vino = new Vino(
@@ -74,7 +96,7 @@ const vino_cuatro: Vino = new Vino(
     750,
     [maridaje_ocho],
     [varietal_ocho],
-    new Bodega(["coordenadas"], "Bodega D", "historia", "nombre", "10/04/2016", new RegionVitivinicola("descripcion", "Región 5"))
+    new Bodega(["coordenadas"], "Bodega D", "historia", "nombre", "10/04/2016", region_dos)
   );
   const vino_seis: Vino = new Vino(
     1995,
@@ -84,7 +106,7 @@ const vino_cuatro: Vino = new Vino(
     420,
     [maridaje_siete],
     [varietal_siete],
-    new Bodega(["coordenadas"], "Bodega E", "historia", "nombre", "30/11/2017", new RegionVitivinicola("descripcion", "Región 6"))
+    new Bodega(["coordenadas"], "Bodega E", "historia", "nombre", "30/11/2017", region_dos)
   );
   const vino_siete: Vino = new Vino(
     2000,
@@ -94,7 +116,7 @@ const vino_cuatro: Vino = new Vino(
     380,
     [maridaje_seis],
     [varietal_seis],
-    new Bodega(["coordenadas"], "Bodega F", "historia", "nombre", "15/07/2015", new RegionVitivinicola("descripcion", "Región 7"))
+    new Bodega(["coordenadas"], "Bodega F", "historia", "nombre", "15/07/2015", region_uno)
   );
   const vino_ocho: Vino = new Vino(
     2005,
@@ -104,7 +126,7 @@ const vino_cuatro: Vino = new Vino(
     500,
     [maridaje_nueve],
     [varietal_nueve],
-    new Bodega(["coordenadas"], "Bodega G", "historia", "nombre", "20/06/2014", new RegionVitivinicola("descripcion", "Región 8"))
+    new Bodega(["coordenadas"], "Bodega G", "historia", "nombre", "20/06/2014", region_uno)
   );
   const vino_nueve: Vino = new Vino(
     2010,
@@ -114,7 +136,7 @@ const vino_cuatro: Vino = new Vino(
     380,
     [maridaje_diez],
     [varietal_diez],
-    new Bodega(["coordenadas"], "Bodega H", "historia", "nombre", "18/09/2013", new RegionVitivinicola("descripcion", "Región 9"))
+    new Bodega(["coordenadas"], "Bodega H", "historia", "nombre", "18/09/2013", region_cinco)
   );
   const vino_diez: Vino = new Vino(
     2015,
@@ -124,7 +146,7 @@ const vino_cuatro: Vino = new Vino(
     420,
     [maridaje_nueve],
     [varietal_nueve],
-    new Bodega(["coordenadas"], "Bodega I", "historia", "nombre", "14/03/2012", new RegionVitivinicola("descripcion", "Región 10"))
+    new Bodega(["coordenadas"], "Bodega I", "historia", "nombre", "14/03/2012", region_cuatro)
   );
   const vino_once: Vino = new Vino(
     2020,
@@ -134,9 +156,40 @@ const vino_cuatro: Vino = new Vino(
     600,
     [maridaje_diez],
     [varietal_diez],
-    new Bodega(["coordenadas"], "Bodega J", "historia", "nombre", "22/08/2011", new RegionVitivinicola("descripcion", "Región 11"))
+    new Bodega(["coordenadas"], "Bodega J", "historia", "nombre", "22/08/2011", region_tres)
   );
-// Crear más vinos y reseñas de manera similar...
+
+  const vino_doce: Vino = new Vino(
+    2020,
+    "",
+    "Vino 12",
+    "Un espumante elegante con burbujas finas y una frescura inigualable.",
+    600,
+    [maridaje_diez],
+    [varietal_diez],
+    new Bodega(["coordenadas"], "Bodega J", "historia", "nombre", "22/08/2011", region_tres)
+  );
+
+  const vino_trece: Vino = new Vino(
+    2020,
+    "",
+    "Vino 13",
+    "Un espumante elegante con burbujas finas y una frescura inigualable.",
+    600,
+    [maridaje_diez],
+    [varietal_diez],
+    new Bodega(["coordenadas"], "Bodega J", "historia", "nombre", "22/08/2011", region_tres)
+  );
+  const vino_catorce: Vino = new Vino(
+    2020,
+    "",
+    "Vino 14",
+    "Un espumante elegante con burbujas finas y una frescura inigualable.",
+    600,
+    [maridaje_diez],
+    [varietal_diez],
+    new Bodega(["coordenadas"], "Bodega J", "historia", "nombre", "22/08/2011", region_tres)
+  );
 
 const resena_uno: Resena = new Resena("Una opción perfecta para celebraciones.", true, "2018-10-10", 10);
 const resena_dos: Resena = new Resena("Un vino perfecto para una tarde de verano.", true, "2019-06-05", 9);
@@ -181,6 +234,13 @@ vino_ocho.agregarResena(resena_cuatro);
 vino_nueve.agregarResena(resena_nueve);
 vino_diez.agregarResena(resena_doce);
 vino_once.agregarResena(resena_nueve)
+vino_doce.agregarResena(resena_diez)
+vino_doce.agregarResena(resena_uno)
+vino_trece.agregarResena(resena_uno)
+vino_catorce.agregarResena(resena_siete)
+vino_catorce.agregarResena(resena_ocho)
+
+
 
 
 export const vinosArray:Vino[] = [ vino_uno,
@@ -193,4 +253,4 @@ export const vinosArray:Vino[] = [ vino_uno,
     vino_ocho,
     vino_nueve,
     vino_diez,
-    vino_once]
+    vino_once, vino_doce, vino_trece, vino_catorce]

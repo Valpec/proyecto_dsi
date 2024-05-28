@@ -2,12 +2,26 @@ import { Reporte } from "../main.js";
 import { Vino } from "./vino.js";
 
 // contrato de la estructura que se devuelve de los vinos con los datos necesarios para mostrarlo en pantalla/excel
+interface RegionProvinciaPais {
+    region: string;
+    provincia?: string;  // Asumiendo que tal vez también quieras tener una propiedad opcional de provincia
+    pais?: string;       // Asumiendo que tal vez también quieras tener una propiedad opcional de país
+}
+
+interface DatosBodega {
+    nombreBodega: string;
+    regionProvinciaPais: RegionProvinciaPais;
+}
+
+interface RegionProvinciaPais {
+    region: string;
+}
 export interface VinoEncontrado {
     nombreVino: string;
     promedioSomm: number;
     promedioGral: number;
     precioSugeridoVino: number;
-    datosBodega: object;
+    datosBodega: DatosBodega;
     varietales: string[];
 }
 export class GestorReporteRankingVinos<T> {
@@ -116,7 +130,7 @@ export class GestorReporteRankingVinos<T> {
 
     // ALTERNATIVA UNO
     tomarCancelacionGenerarReporte(){
-        
+
     }
     registrarCancelacion(){
 

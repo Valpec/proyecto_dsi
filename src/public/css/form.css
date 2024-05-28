@@ -20,3 +20,37 @@
     text-align: center;
 }
 
+.form-reportes{
+    width: 600px;
+    margin: 50px auto;
+    padding: 28px;
+    background-color: #fff; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
+}
+
+.form-input{
+    margin: 50px auto;
+    padding: 15px;
+    background-color: #fff; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
+}
+
+#tittle{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+}
+
+.form-reportes div {
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.form-reportes div #cancelarGeneracionReporte {
+    float: right;
+}
+
+.form-reportes button {
+    border-radius: 3.5px;
+}

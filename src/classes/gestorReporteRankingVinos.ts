@@ -48,11 +48,9 @@ export class GestorReporteRankingVinos<T> {
       }
 
     tomarTipoResena() {
-        // guarda la var que le pasa el user a traves de la pantalla
     }
 
     tomarTipoVisualizacion() {
-        // se supone que toma el tipo de visualizacion
     }
     tomarConfirmacionGenerarReporte(datosReporte:Reporte, vinosArray:Vino[]) {
         const vinosEncontrados =  this.buscarVinosEnPeriodoConResenas(datosReporte.fechaDesde, datosReporte.fechaHasta, datosReporte.tipoResena, vinosArray)
@@ -69,7 +67,6 @@ export class GestorReporteRankingVinos<T> {
             let puntajes = vinos[i].conocerResenasEnPeriodo(desde, hasta)
             let puntajesGrales = vinos[i].conocerResenasEnPeriodoGral(desde, hasta)
             if (puntajes.length === 0) {
-                console.error('no se encontraron vinos para el periodo seleccionado')
                 continue
             }
             // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html VER
@@ -82,10 +79,6 @@ export class GestorReporteRankingVinos<T> {
             const precioSugeridoVino = vinos[i].getPrecioSugerido()
 
             const datosBodega = vinos[i].buscarDatosBodega()
-            if(!datosBodega){
-                // hacer un alert que 
-                // noSeEncuentranBodegasRegistradas()
-            }
             // estructura ---> {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
             const varietales = vinos[i].buscarVarietal()
             // estructura --->[desc1, desc2, desc3]
@@ -95,7 +88,9 @@ export class GestorReporteRankingVinos<T> {
 
         }
         console.log(JSON.stringify(vinosEncontrados))
-
+        if(vinosEncontrados.length === 0){
+            this.informarSituacion("No se encontraron vinos con resena de sommelier")
+        }
         return vinosEncontrados
     }
 
@@ -114,27 +109,27 @@ export class GestorReporteRankingVinos<T> {
 
     ordenarVinosPorCalificacion(vinosEncontrados: VinoEncontrado[]) {
         let vinosOrdenados = vinosEncontrados.sort((a, b) => b.promedioSomm - a.promedioSomm)
-        console.log('vinosOrdenados', vinosOrdenados.length)
+        console.log('Cantidad vinos encontrados:', vinosOrdenados.length)
         let topDiez = vinosOrdenados.splice(0, 10)
         return topDiez
     }
 
     generarReporte() {
         // deberia haber un metodo de generarReporteTop10 de la pantalla del excel
-                    
     }
 
     // ALTERNATIVA UNO
     tomarCancelacionGenerarReporte(){
-
+        console.error('Se cancelo la busqueda del top 10 de vinos')
+        this.registrarCancelacion()
     }
     registrarCancelacion(){
-
+        console.error('Se registro la cancelacion del top 10 vinos')
     }
 
       // ALTERNATIVA DOS
-    informarSituacion(){
-
+    informarSituacion(msj:string){
+        console.log(msj)
     }
     tomarConfirmacionDeLectura(){
         this.registrarCancelacion()

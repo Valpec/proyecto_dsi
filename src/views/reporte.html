@@ -46,6 +46,14 @@
         
         <div>
             <button type="submit" id="confirmarGeneracionReporte">Confirmar</button>
+            <div>
+                <button type="button" id="cancelarGeneracionReporte">Cancelar</button>
+            </div>
+            <div id="errorPopup" style="display: none;">
+                <h2>Error</h2>
+                <p>Se cancelo la operacion.</p>
+                <button onclick="window.location.href = 'index.html'">Volver a Inicio</button>
+            </div>
         </div>
     </form>
     <div id="tablaVinos"></div>

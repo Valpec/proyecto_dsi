@@ -1,4 +1,4 @@
-import { tomarConfirmacionGenerarReporte } from "../../main.js";
+import { tomarConfirmacionGenerarReporte, tomarCancelacionGenerarReporte } from "../../main.js";
 function validacionFecha(fechaDesde, fechaHasta) {
     if (fechaDesde > fechaHasta) {
         alert('La Fecha Hasta no puede ser Menor a la Fecha Desde');
@@ -12,7 +12,6 @@ form.addEventListener('submit', function (e) {
     let tipoResena = document.getElementById('tipoResena').value;
     let formaVisualizacion = document.getElementById('tipoVisualizacion').value;
     validacionFecha(fechaDesde, fechaHasta);
-    // let reporte = new Formulario(fechaDesde, fechaHasta, tipoResena, formaVisualizacion)
     const reporte = {
         fechaDesde: fechaDesde,
         fechaHasta: fechaHasta,
@@ -23,12 +22,10 @@ form.addEventListener('submit', function (e) {
     const vec = tomarConfirmacionGenerarReporte(reporte);
     generarTablaVinos(vec);
     console.log(vec);
-    // tomarConfirmacionGenerarReporte(reporte)
 });
 function generarTablaVinos(vinos) {
     const tablaContainer = document.getElementById('tablaVinos');
     if (tablaContainer) {
-        // Tu código para generar y agregar la tabla aquí
         let tablaHTML = '<table class="table table-striped">';
         tablaHTML += `
             <thead>
@@ -55,7 +52,7 @@ function generarTablaVinos(vinos) {
                     <td>${vino.nombreVino}</td>
                     <td>${vino.promedioSomm}</td>
                     <td>${vino.promedioGral}</td>
-                    <td>${vino.precioSugeridoVino}$</td>
+                    <td>$${vino.precioSugeridoVino}</td>
                     <td>${datosBodega.nombreBodega}</td>
                     <td>${varietales}</td>
                     <td>${Region.region}</td>
@@ -66,12 +63,15 @@ function generarTablaVinos(vinos) {
         });
         tablaHTML += '</tbody></table>';
         tablaContainer.innerHTML = tablaHTML;
-        // Log para verificar que la tabla se ha generado
-        //console.log('Tabla generada:', tablaHTML);
     }
     else {
         console.error('No se encontró ningún elemento con el id "tablaVinos"');
     }
 }
-function obtenerNombreDeLaBodega() {
-}
+const cancelarGeneracionReporteButton = document.getElementById('cancelarGeneracionReporte');
+const errorPopup = document.getElementById('errorPopup');
+cancelarGeneracionReporteButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    tomarCancelacionGenerarReporte();
+    errorPopup.style.display = 'block';
+});

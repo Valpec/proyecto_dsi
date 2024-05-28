@@ -1,4 +1,4 @@
-import { tomarConfirmacionGenerarReporte, Reporte } from "../../main.js";
+import { tomarConfirmacionGenerarReporte, Reporte, tomarCancelacionGenerarReporte } from "../../main.js";
 
 import {VinoEncontrado} from "../../classes/gestorReporteRankingVinos.js"
 import { Vino } from "../../classes/vino.js";
@@ -18,7 +18,6 @@ form.addEventListener('submit', function(e) {
     let tipoResena = (document.getElementById('tipoResena') as HTMLOptionElement).value;
     let formaVisualizacion = (document.getElementById('tipoVisualizacion') as HTMLOptionElement).value
     validacionFecha(fechaDesde, fechaHasta);
-    // let reporte = new Formulario(fechaDesde, fechaHasta, tipoResena, formaVisualizacion)
     const reporte: Reporte = {
         fechaDesde: fechaDesde,
         fechaHasta: fechaHasta,
@@ -29,15 +28,13 @@ form.addEventListener('submit', function(e) {
     const vec = tomarConfirmacionGenerarReporte(reporte)
     generarTablaVinos(vec)
     console.log(vec)
-    // tomarConfirmacionGenerarReporte(reporte)
-
 
 });
 
 function generarTablaVinos(vinos:VinoEncontrado[]){
+
     const tablaContainer = document.getElementById('tablaVinos');
     if (tablaContainer) {
-        // Tu código para generar y agregar la tabla aquí
         let tablaHTML = '<table class="table table-striped">';
         tablaHTML += `
             <thead>
@@ -55,7 +52,6 @@ function generarTablaVinos(vinos:VinoEncontrado[]){
             </thead>
             <tbody>
         `;
-        
 
         vinos.forEach(vino => {
             const varietales = vino.varietales.join(', ')
@@ -66,7 +62,7 @@ function generarTablaVinos(vinos:VinoEncontrado[]){
                     <td>${vino.nombreVino}</td>
                     <td>${vino.promedioSomm}</td>
                     <td>${vino.promedioGral}</td>
-                    <td>${vino.precioSugeridoVino}$</td>
+                    <td>$${vino.precioSugeridoVino}</td>
                     <td>${datosBodega.nombreBodega}</td>
                     <td>${varietales}</td>
                     <td>${Region.region}</td>
@@ -79,14 +75,18 @@ function generarTablaVinos(vinos:VinoEncontrado[]){
         tablaHTML += '</tbody></table>';
         tablaContainer.innerHTML = tablaHTML;
 
-        // Log para verificar que la tabla se ha generado
-        //console.log('Tabla generada:', tablaHTML);
     } else {
         console.error('No se encontró ningún elemento con el id "tablaVinos"');
     }
 
 }
 
-function obtenerNombreDeLaBodega(){
-    
-}
+const cancelarGeneracionReporteButton: HTMLButtonElement = document.getElementById('cancelarGeneracionReporte') as HTMLButtonElement;
+const errorPopup: HTMLElement = document.getElementById('errorPopup') as HTMLElement;
+
+
+cancelarGeneracionReporteButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    tomarCancelacionGenerarReporte()
+    errorPopup.style.display = 'block'; 
+  });

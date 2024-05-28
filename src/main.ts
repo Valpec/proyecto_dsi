@@ -14,10 +14,6 @@ export interface Reporte {
 }
 
 
-// array de todos los vinos. A futuro meterlo en .json y usar 'fs' de node
-// const vinosArray: Vino[] = vinosData
-// const vinos:Vino[] = []
-
 // instancia del gestor al que le paso los metodos
 let gestorReporte = new GestorReporteRankingVinos(vinosArray)
 // let pantalla = new Pantalla(gestorReporte)

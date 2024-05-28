@@ -2,13 +2,10 @@ import { Vino } from "./vino.js";
 export class Resena {
 
     private comentario: string;
-    // por tema de que coincide con el metodo, renombramos a esPremium
     private premium: boolean;
     private fechaResena: string;
     private puntaje: number;
     private vino: Vino | null=null;
-
-    // que tipo?????? poara la fechaHora
 
     constructor(comentario: string,  premium: boolean, fechaResena: string, puntaje: number) {
         this.comentario = comentario;
@@ -40,13 +37,11 @@ export class Resena {
             return false
         }
     }
-
     
     esEnPeriodoFecha(desde:string, hasta:string){
         const fecha = new Date(this.fechaResena)
         const desdeEnDate = new Date(desde)
         const hastaEnDate = new Date(hasta)
-        console.log(fecha, desdeEnDate, hastaEnDate)
         if(fecha >= desdeEnDate && fecha <= hastaEnDate){
             return true
         }else{

@@ -1,5 +1,7 @@
 import { tomarConfirmacionGenerarReporte, Reporte } from "../../main.js";
 
+import {VinoEncontrado} from "../../classes/gestorReporteRankingVinos.js"
+import { Vino } from "../../classes/vino.js";
 
 function validacionFecha(fechaDesde: string, fechaHasta: string){
     if (fechaDesde > fechaHasta) {
@@ -16,7 +18,6 @@ form.addEventListener('submit', function(e) {
     let tipoResena = (document.getElementById('tipoResena') as HTMLOptionElement).value;
     let formaVisualizacion = (document.getElementById('tipoVisualizacion') as HTMLOptionElement).value
     validacionFecha(fechaDesde, fechaHasta);
-    // let reporte = new Formulario(fechaDesde, fechaHasta, tipoResena, formaVisualizacion)
     const reporte: Reporte = {
         fechaDesde: fechaDesde,
         fechaHasta: fechaHasta,
@@ -24,49 +25,46 @@ form.addEventListener('submit', function(e) {
         formaVisualizacion: formaVisualizacion
     };
     console.log(reporte)
-    tomarConfirmacionGenerarReporte(reporte)
+    const vec = tomarConfirmacionGenerarReporte(reporte)
+    generarTablaVinos(vec)
+    console.log(vec)
 
-//     const tablaContainer = document.getElementById('tablaVinos');
-//     let tablaHTML = '<table class="table table-striped">';
-//     tablaHTML += `
-//         <thead>
-//             <tr>
-//                 <th>Nombre</th>
-//                 <th>Calificación</th>
-//                 <th>Sommelier</th>
-//                 <th>Precio</th>
-//                 <th>Bodega</th>
-//                 <th>Varietal</th>
-//                 <th>Región</th>
-//                 <th>País</th>
-//                 <th>Fecha</th>
-//             </tr>
-//         </thead>
-//         <tbody>
-//     `;
 
-//     vinosFiltrados.forEach(vino => {
-//         tablaHTML += `
-//             <tr>
-//                 <td>${vino.nombre}</td>
-//                 <td>${vino.calificacion}</td>
-//                 <td>${vino.esSommelier ? 'Sí' : 'No'}</td>
-//                 <td>${vino.precio}</td>
-//                 <td>${vino.bodega}</td>
-//                 <td>${vino.varietal.join(', ')}</td>
-//                 <td>${vino.region}</td>
-//                 <td>${vino.pais}</td>
-//                 <td>${vino.fecha}</td>
-//             </tr>
-//         `;
-//     });
-
-//     tablaHTML += '</tbody></table>';
-//     tablaContainer.innerHTML = tablaHTML;
-
-//     // Log para verificar que la tabla se ha generado
-//     console.log('Tabla generada:', tablaHTML);
 });
 
+function generarTablaVinos(vinos:VinoEncontrado[]){
+    const tablaContainer = document.getElementById('tablaVinos');
+    if (tablaContainer) {
+        // Tu código para generar y agregar la tabla aquí
+        let tablaHTML = '<table class="table table-striped">';
+        tablaHTML += `
+            <thead>
+                <tr>
+                    <th>Nombre Vino</th>
+                    <th>Promedio Sommelier</th>
+                    <th>Promedio General</th>
+                    <th>Precio Sugerido</th>
+                </tr>
+            </thead>
+            <tbody>
+        `;
 
-    
+        vinos.forEach(vino => {
+            tablaHTML += `
+                <tr>
+                    <td>${vino.nombreVino}</td>
+                    <td>${vino.promedioSomm}</td>
+                    <td>${vino.promedioGral}</td>
+                    <td>${vino.precioSugeridoVino}$</td>
+                </tr>
+            `;
+        });
+
+        tablaHTML += '</tbody></table>';
+        tablaContainer.innerHTML = tablaHTML;
+
+    } else {
+        console.error('No se encontró ningún elemento con el id "tablaVinos"');
+    }
+
+}

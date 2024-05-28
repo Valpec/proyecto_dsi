@@ -1,11 +1,9 @@
 export class Resena {
     comentario;
-    // por tema de que coincide con el metodo, renombramos a esPremium
     premium;
     fechaResena;
     puntaje;
     vino = null;
-    // que tipo?????? poara la fechaHora
     constructor(comentario, premium, fechaResena, puntaje) {
         this.comentario = comentario;
         this.premium = premium;
@@ -36,7 +34,6 @@ export class Resena {
         const fecha = new Date(this.fechaResena);
         const desdeEnDate = new Date(desde);
         const hastaEnDate = new Date(hasta);
-        console.log(fecha, desdeEnDate, hastaEnDate);
         if (fecha >= desdeEnDate && fecha <= hastaEnDate) {
             return true;
         }

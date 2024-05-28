@@ -54,8 +54,6 @@ export class Vino {
         for(let i=0; i< this.resena.length; i ++){
             let esSommelier = this.resena[i].sosDeSommelier()
             let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
-            console.log('es de somm', esSommelier)
-            console.log('es de per', esDePeriodo)
 
             if(esSommelier && esDePeriodo){
                 let punt = this.resena[i].getPuntaje()

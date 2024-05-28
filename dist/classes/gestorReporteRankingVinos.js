@@ -8,7 +8,6 @@ export class GestorReporteRankingVinos {
         // se supone que este metodo es el triggereado por el usuario en el momento que se ejecuta el boton de generar ranking de vinos
         // quisiera impleemntar aca un window.replace, como para decir que hace algo, pero sinceramente descnozco que tanto romperia la cabeza hacer eso
     }
-    // las funciones parseDate y validar periodo son porque la fecha ingresada es en formato 'dd/mm/yyyy', y para usar el Date y poder comparar, se necesita 'yyyy/mm/dd'
     validarPeriodo(desde, hasta) {
         const fechaActual = new Date();
         const fechaDesde = new Date(desde);
@@ -36,10 +35,12 @@ export class GestorReporteRankingVinos {
         console.log(JSON.stringify(vinosEncontrados));
         for (let i = 0; i < vinos.length; i++) {
             console.log('fechas', desde, hasta);
+            // la variable puntajes es de los sommelier. El puntaje gral, de los somm, amigos, normal
             let puntajes = vinos[i].conocerResenasEnPeriodo(desde, hasta);
             let puntajesGrales = vinos[i].conocerResenasEnPeriodoGral(desde, hasta);
             if (puntajes.length === 0) {
-                console.error('No hay resenas de someelier en el periodo indicado, para el vino seleccionado');
+                console.error('no se encontraron vinos para el periodo seleccionado');
+                continue;
             }
             console.log('lso putnajes', puntajes);
             // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html VER
@@ -58,34 +59,29 @@ export class GestorReporteRankingVinos {
             // estructura ---> {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
             const varietales = vinos[i].buscarVarietal();
             // estructura --->[desc1, desc2, desc3]
-            //VER, creo que daria problema el asignar con el indicice si es que hay sin puntaje.
             const datosVino = { nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales };
-            vinosEncontrados[i] = datosVino;
+            vinosEncontrados.push(datosVino);
         }
         console.log(JSON.stringify(vinosEncontrados));
         return vinosEncontrados;
     }
     calcularPromCalificacionPorSommelier(puntajes) {
         let sumatoria = puntajes.reduce((sum, current) => sum + current, 0);
-        let promedio = sumatoria / puntajes.length;
-        // console.log('sumatoria',sumatoria)
-        // console.log('puntajes',puntajes.length)
+        let promedio = (sumatoria / puntajes.length);
+        console.log('sumatoria', sumatoria, 'promedio somm', promedio);
         return promedio;
-    }
-    ordenarVinosPorCalificacion(vinosEncontrados) {
-        let vinosOrdenados = vinosEncontrados.sort((a, b) => a.promedioSomm - b.promedioSomm);
-        // COMO NO HAGO EL DE BUSCAR EL PROMEDIO DE CALIFICACION GENERAL, SACO DE ACA EL TOP 10 !!!!!!
-        let topDiez = vinosOrdenados.splice(0, 10);
-        return topDiez;
     }
     calcularPromCalificacionGeneral(puntajesGral) {
         let sumatoria = puntajesGral.reduce((sum, current) => sum + current, 0);
-        let promedio = sumatoria / puntajesGral.length;
-        // console.log('sumatoria',sumatoria)
-        // console.log('puntajes',puntajes.length)
+        let promedio = (sumatoria / puntajesGral.length);
+        console.log('sumatoria', sumatoria, 'promedio gral', promedio);
         return promedio;
     }
-    // DEBERIA HACER LA BUSQUEDA DE LA CALIFICACION POR GENERAL< NO SOMMELIER???????? VER
+    ordenarVinosPorCalificacion(vinosEncontrados) {
+        let vinosOrdenados = vinosEncontrados.sort((a, b) => b.promedioSomm - a.promedioSomm);
+        let topDiez = vinosOrdenados.splice(0, 10);
+        return topDiez;
+    }
     generarReporte() {
         // deberia haber un metodo de generarReporteTop10 de la pantalla del excel
     }

@@ -149,26 +149,38 @@ const resena_cinco: Resena = new Resena("Un vino con un bouquet aromático excep
 const resena_seis: Resena = new Resena("Un vino que cautiva con su elegancia y sutileza, perfecto para ocasiones especiales.", true, "2023-11-28", 9.7);
 const resena_siete: Resena = new Resena("Un vino que destaca por su frescura y versatilidad, ideal para maridar con una amplia variedad de platos.", true, "2024-02-10", 9.3);
 const resena_ocho: Resena = new Resena("Un vino con una expresión frutal encantadora y una textura sedosa en boca.", false, "2024-05-05", 9.6);
-const resena_nueve: Resena = new Resena("Un vino complejo y estructurado que revela su carácter con cada sorbo.", true, "2024-08-20", 9.9);
+const resena_nueve: Resena = new Resena("Un vino complejo y estructurado que revela su carácter con cada sorbo.", false, "2024-08-20", 9.9);
 const resena_doce: Resena = new Resena("Un vino que sorprende por su armonía y elegancia, una joya enológica.", true, "2024-11-15", 9.8);
 
 
 
-vino_cinco.agregarResena(resena_once);
-vino_cuatro.agregarResena(resena_tres);
 vino_uno.agregarResena(resena_uno)
+vino_uno.agregarResena(resena_dos)
+vino_uno.agregarResena(resena_tres)
+vino_uno.agregarResena(resena_ocho)
+
+
 vino_dos.agregarResena(resena_dos);
-vino_ocho.agregarResena(resena_cuatro);
+vino_dos.agregarResena(resena_tres);
+vino_dos.agregarResena(resena_cinco);
+
 vino_tres.agregarResena(resena_diez);
+vino_tres.agregarResena(resena_nueve);
 
+vino_cuatro.agregarResena(resena_tres);
 
-
+vino_cinco.agregarResena(resena_once);
 vino_cinco.agregarResena(resena_cinco);
+
 vino_seis.agregarResena(resena_seis);
+vino_seis.agregarResena(resena_ocho);
+
 vino_siete.agregarResena(resena_siete);
 vino_ocho.agregarResena(resena_ocho);
+vino_ocho.agregarResena(resena_cuatro);
 vino_nueve.agregarResena(resena_nueve);
 vino_diez.agregarResena(resena_doce);
+vino_once.agregarResena(resena_nueve)
 
 
 export const vinosArray:Vino[] = [ vino_uno,

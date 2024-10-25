@@ -52,11 +52,11 @@ const varietal_siete = new Varietal("Syrah/Shiraz", 35, new TipoUva("Uva frutal"
 
 
 
-const vino_uno:Vino = new Vino(1931, "", "Vino 1", "Un vino tinto con aromas intensos de frutas rojas y un toque de roble", 524,[maridaje_dos, maridaje_uno] , [varietal_uno], new Bodega(["coordenadas"], "Mira que vino" , "historia", "Bodega Zuccardi", "12/05/2020",region_uno))
+const vino_uno:Vino = new Vino(1931, "", "Balbo", "Un vino tinto con aromas intensos de frutas rojas y un toque de roble", 524,[maridaje_dos, maridaje_uno] , [varietal_uno], new Bodega(["coordenadas"], "Mira que vino" , "historia", "Bodega Zuccardi", "12/05/2020",region_uno))
 const vino_dos: Vino = new Vino(
   1950,
   "",
-  "Vino 2",
+  "Dada",
   "Un blanco refrescante con notas cítricas y florales.",
   450,
   [maridaje_tres, maridaje_cuatro],
@@ -67,7 +67,7 @@ const vino_dos: Vino = new Vino(
 const vino_tres: Vino = new Vino(
   1975,
   "",
-  "Vino 3",
+  "Skinny Shotgun",
   "Un rosado vibrante con aromas a frutas del bosque y un toque de especias.",
   375,
   [maridaje_cuatro],
@@ -77,7 +77,7 @@ const vino_tres: Vino = new Vino(
 const vino_cuatro: Vino = new Vino(
     1960,
     "",
-    "Vino 4",
+    "Vino Toro",
     "Un espumante fresco y vibrante con burbujas finas y persistentes.",
     600,
     [maridaje_seis],
@@ -88,7 +88,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_cinco: Vino = new Vino(
     1982,
     "",
-    "Vino 5",
+    "Bell ville",
     "Un tinto robusto con taninos suaves y notas de frutas maduras y especias.",
     750,
     [maridaje_ocho],
@@ -98,7 +98,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_seis: Vino = new Vino(
     1995,
     "",
-    "Vino 6",
+    "Luigi bosca",
     "Un blanco seco con una acidez refrescante y aromas a frutas tropicales.",
     420,
     [maridaje_siete],
@@ -108,7 +108,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_siete: Vino = new Vino(
     2000,
     "",
-    "Vino 7",
+    "Cordero",
     "Un rosado delicado con una explosión de aromas a fresas y notas florales.",
     380,
     [maridaje_seis],
@@ -118,7 +118,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_ocho: Vino = new Vino(
     2005,
     "",
-    "Vino 8",
+    "Piel lobo",
     "Un tinto joven y frutal con una explosión de sabores a frutas del bosque.",
     500,
     [maridaje_nueve],
@@ -128,7 +128,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_nueve: Vino = new Vino(
     2010,
     "",
-    "Vino 9",
+    "El Caniche",
     "Un blanco fresco y ligero con notas cítricas y un final refrescante.",
     380,
     [maridaje_diez],
@@ -138,7 +138,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_diez: Vino = new Vino(
     2015,
     "",
-    "Vino 10",
+    "D.V Catena",
     "Un rosado seco con aromas a frutas rojas y una acidez equilibrada.",
     420,
     [maridaje_nueve],
@@ -148,7 +148,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_once: Vino = new Vino(
     2020,
     "",
-    "Vino 11",
+    "LPQM",
     "Un espumante elegante con burbujas finas y una frescura inigualable.",
     600,
     [maridaje_diez],
@@ -159,7 +159,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_doce: Vino = new Vino(
     2020,
     "",
-    "Vino 12",
+    "El Diavlo",
     "Un espumante elegante con burbujas finas y una frescura inigualable.",
     600,
     [maridaje_diez],
@@ -170,7 +170,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_trece: Vino = new Vino(
     2020,
     "",
-    "Vino 13",
+    "Veintiun pilotos",
     "Un espumante elegante con burbujas finas y una frescura inigualable.",
     600,
     [maridaje_diez],
@@ -180,7 +180,7 @@ const vino_cuatro: Vino = new Vino(
   const vino_catorce: Vino = new Vino(
     2020,
     "",
-    "Vino 14",
+    "Monitos articos  ",
     "Un espumante elegante con burbujas finas y una frescura inigualable.",
     600,
     [maridaje_diez],
@@ -188,19 +188,19 @@ const vino_cuatro: Vino = new Vino(
     new Bodega(["coordenadas"], "Bodega J", "historia", "Bodega Salentein", "22/08/2011", region_tres)
   );
 
-const resena_uno: Resena = new Resena("Una opción perfecta para celebraciones.", true, "2018-10-10", 10);
-const resena_dos: Resena = new Resena("Un vino perfecto para una tarde de verano.", true, "2019-06-05", 9);
-const resena_tres: Resena = new Resena("Un vino que sorprende por su equilibrio y complejidad.", true, "2020-10-12", 9.5);
-const resena_cuatro: Resena = new Resena("Un vino con una relación calidad-precio excepcional.", true, "2021-04-07", 9);
-const resena_diez: Resena = new Resena("Un vino con cuerpo y carácter, ideal para maridar con platos de carne roja.", true, "2021-11-20", 8.5);
-const resena_once: Resena = new Resena("Un vino joven y fresco, perfecto para reuniones informales.", true, "2022-03-08", 8);
+const resena_uno: Resena = new Resena("Una opción perfecta para celebraciones.", true, "2018-10-10", 5);
+const resena_dos: Resena = new Resena("Un vino perfecto para una tarde de verano.", true, "2019-06-05", 4.5);
+const resena_tres: Resena = new Resena("Un vino que sorprende por su equilibrio y complejidad.", true, "2020-10-12", 3.5);
+const resena_cuatro: Resena = new Resena("Un vino con una relación calidad-precio excepcional.", true, "2021-04-07", 5);
+const resena_diez: Resena = new Resena("Un vino con cuerpo y carácter, ideal para maridar con platos de carne roja.", true, "2021-11-20", 5);
+const resena_once: Resena = new Resena("Un vino joven y fresco, perfecto para reuniones informales.", true, "2022-03-08", 2);
 
-const resena_cinco: Resena = new Resena("Un vino con un bouquet aromático excepcional y un final largo y seductor.", true, "2023-07-15", 9.8);
-const resena_seis: Resena = new Resena("Un vino que cautiva con su elegancia y sutileza, perfecto para ocasiones especiales.", true, "2023-11-28", 9.7);
-const resena_siete: Resena = new Resena("Un vino que destaca por su frescura y versatilidad, ideal para maridar con una amplia variedad de platos.", true, "2024-02-10", 9.3);
-const resena_ocho: Resena = new Resena("Un vino con una expresión frutal encantadora y una textura sedosa en boca.", false, "2024-05-05", 9.6);
-const resena_nueve: Resena = new Resena("Un vino complejo y estructurado que revela su carácter con cada sorbo.", false, "2024-08-20", 9.9);
-const resena_doce: Resena = new Resena("Un vino que sorprende por su armonía y elegancia, una joya enológica.", true, "2024-11-15", 9.8);
+const resena_cinco: Resena = new Resena("Un vino con un bouquet aromático excepcional y un final largo y seductor.", true, "2023-07-15", 3);
+const resena_seis: Resena = new Resena("Un vino que cautiva con su elegancia y sutileza, perfecto para ocasiones especiales.", true, "2023-11-28", 4);
+const resena_siete: Resena = new Resena("Un vino que destaca por su frescura y versatilidad, ideal para maridar con una amplia variedad de platos.", true, "2024-02-10", 3);
+const resena_ocho: Resena = new Resena("Un vino con una expresión frutal encantadora y una textura sedosa en boca.", false, "2024-05-05", 3.5);
+const resena_nueve: Resena = new Resena("Un vino complejo y estructurado que revela su carácter con cada sorbo.", false, "2024-08-20", 2.5);
+const resena_doce: Resena = new Resena("Un vino que sorprende por su armonía y elegancia, una joya enológica.", true, "2024-11-15", 1);
 
 
 
@@ -235,6 +235,9 @@ vino_doce.agregarResena(resena_diez)
 vino_doce.agregarResena(resena_uno)
 vino_trece.agregarResena(resena_uno)
 vino_catorce.agregarResena(resena_siete)
+vino_catorce.agregarResena(resena_seis)
+vino_catorce.agregarResena(resena_cinco)
+
 vino_catorce.agregarResena(resena_ocho)
 
 

@@ -20,8 +20,10 @@ form.addEventListener('submit', function (e) {
     };
     console.log(reporte);
     const vec = tomarConfirmacionGenerarReporte(reporte);
-    generarTablaVinos(vec);
     console.log(vec);
+    if (vec.length > 0) {
+        generarTablaVinos(vec);
+    }
 });
 function generarTablaVinos(vinos) {
     const tablaContainer = document.getElementById('tablaVinos');

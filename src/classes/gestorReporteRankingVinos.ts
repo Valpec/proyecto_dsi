@@ -60,6 +60,7 @@ export class GestorReporteRankingVinos<T> {
 
     buscarVinosEnPeriodoConResenas(desde: string, hasta: string, tipoResena: string, vinos: Vino[]) {
         let vinosEncontrados: VinoEncontrado[] = []
+        
         console.log(JSON.stringify(vinosEncontrados))
 
         for (let i = 0; i < vinos.length; i++) {

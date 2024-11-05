@@ -24,10 +24,14 @@
             <input type="date" id="fechaDesde" name="FechaDesde" required>
             <label for="FechaHasta">Fecha Hasta:</label>
             <input type="date" id="fechaHasta" name="FechaHasta" required>
+            <div id="errorFecha" class="errorForms">
+                Fechas inválidas
+            </div>
         </div>
         
+        
         <div class="form-input">
-            <label for="tipoResena">Tipo de reseña:</label>
+            <label for="tipoResena">Tipo de reseña</label>
               <select id="tipoResena" name="tipoResena">
                 <option value="0">Normal</option>
                 <option value="1">De Sommelier</option>
@@ -36,7 +40,7 @@
         </div>
         
         <div class="form-input">
-            <label for="tipoVisualizacion">Forma de visualización:</label>
+            <label for="tipoVisualizacion">Forma de visualización</label>
               <select id="tipoVisualizacion" name="tipoVisualizacion">
                 <option value="0">PDF</option>
                 <option value="1">Excel</option>
@@ -46,18 +50,19 @@
         
         <div>
             <button type="submit" id="confirmarGeneracionReporte">Confirmar</button>
-            <div>
-                <button type="button" id="cancelarGeneracionReporte">Cancelar</button>
-            </div>
-            <div id="errorPopup" style="display: none;">
-                <h2>Error</h2>
-                <p>Se cancelo la operacion.</p>
-                <button onclick="window.location.href = 'index.html'">Volver a Inicio</button>
-            </div>
+            <button type="button" id="cancelarGeneracionReporte" href="">Cancelar</button>    
         </div>
     </form>
+    <div id="msjError">
+        <p>No se encontraron vinos para las opciones seleccionadas.</p>
+    </div>
+    <div id="msjCancelacion">
+        <p>Se cancelo la operación</p>
+        <button id="volverInicio">Volver al Inicio</button>
+    </div>
+    
     <div id="tablaVinos"></div>
-    <footer class="text-white">
+    <footer class="text-white footer">
         <div class="container text-center py-2">
           <small>© 2024 BonVino - Todos los derechos reservados.</small>
         </div>
@@ -66,4 +71,4 @@
     <script  type="module" src="../../dist/public/ts/app.js" ></script>
 
 </body>
-</html>›
+</html>

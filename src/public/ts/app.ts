@@ -1,12 +1,18 @@
 import { tomarConfirmacionGenerarReporte, Reporte, tomarCancelacionGenerarReporte } from "../../main.js";
 
 import {VinoEncontrado} from "../../classes/gestorReporteRankingVinos.js"
-import { Vino } from "../../classes/vino.js";
+
 
 function validacionFecha(fechaDesde: string, fechaHasta: string){
-    if (fechaDesde > fechaHasta) {
-        alert('La Fecha Hasta no puede ser Menor a la Fecha Desde')
-    } 
+    const fechaDesdeObj = new Date(fechaDesde);
+    const fechaHastaObj = new Date(fechaHasta);
+    const errorFecha = document.getElementById('errorFecha') as HTMLElement;
+    console.log(fechaDesde, fechaHasta, fechaDesdeObj, fechaHastaObj)
+    if (fechaDesdeObj > fechaHastaObj) {
+        errorFecha!.style.display = 'inline'
+        return false; 
+    }
+    return true;
 }
 
 const form = document.getElementById('reporteForm')!;
@@ -24,11 +30,18 @@ form.addEventListener('submit', function(e) {
         tipoResena: tipoResena,
         formaVisualizacion: formaVisualizacion
     };
+
+
     console.log(reporte)
     const vec = tomarConfirmacionGenerarReporte(reporte)
     console.log(vec)
+
+    const msjError = document.getElementById('msjError') as HTMLElement
+
     if (vec.length > 0) {
         generarTablaVinos(vec)
+    }else{
+        msjError.style.display = 'block'
     }
 
 });
@@ -83,12 +96,31 @@ function generarTablaVinos(vinos:VinoEncontrado[]){
 
 }
 
-const cancelarGeneracionReporteButton: HTMLButtonElement = document.getElementById('cancelarGeneracionReporte') as HTMLButtonElement;
-const errorPopup: HTMLElement = document.getElementById('errorPopup') as HTMLElement;
+// / Código para el boton de cancelar la operación.
+// Código para el botón de cancelar la operación
+window.addEventListener("DOMContentLoaded", () => {
+    const botonCancelar = document.getElementById("cancelarGeneracionReporte") as HTMLButtonElement;
+    const formulario = document.getElementById("reporteForm") as HTMLElement;
+    const msjCancelacion = document.getElementById("msjCancelacion") as HTMLElement;
+    const volverAlInicio = document.getElementById("volverInicio") as HTMLButtonElement;
+    const tablaContainer = document.getElementById("tablaVinos") as HTMLElement;
 
+    // Verificar que los elementos existen antes de añadir listeners
+    if (botonCancelar && formulario && msjCancelacion && volverAlInicio) {
+        // Asegurarse de que el mensaje de cancelación esté oculto inicialmente
+        msjCancelacion.style.display = "none"
 
-cancelarGeneracionReporteButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    tomarCancelacionGenerarReporte()
-    errorPopup.style.display = 'block'; 
-  });
+        botonCancelar.addEventListener("click", () => {
+            tablaContainer.style.display= "none"
+            formulario.style.display = "none" // Oculta el formulario
+            // formulario.classList.add("oculto"); //oculata el form
+            msjCancelacion.style.display = "block" // Muestra el mensaje de cancelación
+        });
+
+        volverAlInicio.addEventListener("click", () => {
+            window.location.href = "index.html" // Redirige al índice
+        });
+    } else {
+        console.error("Error: Uno o más elementos necesarios no se encontraron en el DOM.")
+    }
+});

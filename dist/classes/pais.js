@@ -10,7 +10,7 @@ export class Pais {
     }
     establecerProvincia(provincia) {
         this.provincias.push(provincia);
-        provincia.establecerPais(this);
+        // provincia.establecerPais(this)
     }
     contarBodegas() {
     }

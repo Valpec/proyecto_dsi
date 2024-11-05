@@ -1,7 +1,10 @@
 import { GestorReporteRankingVinos , VinoEncontrado} from "./classes/gestorReporteRankingVinos.js"
 
+//CAMBIAR -- reemplazar array por api
 import { vinosArray } from "./arrayVinos.js";
-// esta interfaz de reporte es la estructura que deben respetar los datos pasado como objeto del formulario del html (app.ts para ver como esta documentado)
+
+
+// la estructura que deben respetar los datos pasado como objeto del formulario del html (app.ts para ver como esta documentado)
 export interface Reporte {
     fechaDesde: string;
     fechaHasta: string;
@@ -9,12 +12,14 @@ export interface Reporte {
     formaVisualizacion: string;
 }
 
+
 // instancia del gestor al que le paso los metodos
 let gestorReporte = new GestorReporteRankingVinos(vinosArray)
 
 export function tomarConfirmacionGenerarReporte(reporte:Reporte){
     let datosReporte = reporte
     let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    console.log(topDiez)
     return topDiez
 };
 export function tomarCancelacionGenerarReporte(){
@@ -32,3 +37,6 @@ export function noSeEncuentrasResenasSommelier(){
 export function tomarConfirmacionDeLectura(){
     gestorReporte.tomarConfirmacionDeLectura()
 }
+
+
+

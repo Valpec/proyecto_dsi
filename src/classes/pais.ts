@@ -12,7 +12,7 @@ export class Pais {
     }
     establecerProvincia(provincia:Provincia){
         this.provincias.push(provincia)
-        provincia.establecerPais(this)
+        // provincia.establecerPais(this)
     }
     
     contarBodegas() {

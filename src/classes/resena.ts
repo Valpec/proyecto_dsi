@@ -33,9 +33,7 @@ export class Resena {
         if(this.premium){
             return true
         }
-        else{
             return false
-        }
     }
     
     esEnPeriodoFecha(desde:string, hasta:string){
@@ -47,6 +45,15 @@ export class Resena {
         }else{
             return false
         }
+    }
+
+   
+    getPuntajeSomm(){
+        if(this.sosDeSommelier()){
+            return this.puntaje
+        }
+        // nunca va a retornar 0, pero para no tener que hacer la validacion por el tipo de dato
+        return 0
     }
 
 }

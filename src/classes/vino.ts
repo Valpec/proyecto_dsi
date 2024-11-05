@@ -2,6 +2,7 @@ import { Maridaje } from "./maridaje.js";
 import { Resena } from "./resena.js";
 import { Varietal } from "./varietal.js";
 import { Bodega } from "./bodega.js";
+import { IteradorResena } from "./iteradorResena.js";
 export class Vino {
 
     private anada: number;
@@ -49,33 +50,19 @@ export class Vino {
     getPrecioSugerido(){
         return this.precioArs
     }
-    conocerResenasEnPeriodo(desde:string, hasta:string){
-        let puntajes = []
-        for(let i=0; i< this.resena.length; i ++){
-            let esSommelier = this.resena[i].sosDeSommelier()
-            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
+    // conocerResenasEnPeriodo(desde:string, hasta:string){
+    //     let puntajes = []
+    //     for(let i=0; i< this.resena.length; i ++){
+    //         let esSommelier = this.resena[i].sosDeSommelier()
+    //         let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
 
-            if(esSommelier && esDePeriodo){
-                let punt = this.resena[i].getPuntaje()
-                puntajes.push(punt)
-            }
-        }
-        return puntajes
-    }
-    conocerResenasEnPeriodoGral(desde:string, hasta:string){
-        let puntajes = []
-        for(let i=0; i< this.resena.length; i ++){
-            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
-            console.log('es de per', esDePeriodo)
-
-            if(esDePeriodo){
-                let punt = this.resena[i].getPuntaje()
-                puntajes.push(punt)
-            }
-        }
-        return puntajes
-    }
-
+    //         if(esSommelier && esDePeriodo){
+    //             let punt = this.resena[i].getPuntaje()
+    //             puntajes.push(punt)
+    //         }
+    //     }
+    //     return puntajes
+    // }
     buscarDatosBodega(){
         const nombreBodega = this.bodega.getNombre()
         // el regionProvPais es un obtejo
@@ -92,6 +79,22 @@ export class Vino {
         }
         return varietales
     }
+
+    // a esta no se usa mas, por el iterador
+    conocerResenasEnPeriodoGral(desde:string, hasta:string){
+        let puntajes = []
+        for(let i=0; i< this.resena.length; i ++){
+            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
+            console.log('es de per', esDePeriodo)
+
+            if(esDePeriodo){
+                let punt = this.resena[i].getPuntaje()
+                puntajes.push(punt)
+            }
+        }
+        return puntajes
+    }
+
     
     conocerResenas(desde:string, hasta:string){
         let puntajesGral = []
@@ -108,4 +111,30 @@ export class Vino {
 
     }
 
+    crearIterador(resena:Resena[], filtro:string[]){
+        return new IteradorResena(resena, filtro);
+    }
+
+    conocerResenasEnPeriodo(desde:string, hasta: string){
+        let puntajesSomm = []
+        let puntajesGen = []
+        // Iteradot
+        let iteradorResena = this.crearIterador(this.resena, [desde, hasta]);
+        iteradorResena.primero()
+        while(iteradorResena.haTerminado() == false){
+
+            let resenaActual = iteradorResena.elementoActual()
+            if(resenaActual){
+                let puntGen = resenaActual.getPuntaje()
+                let puntSomm = resenaActual.getPuntajeSomm()
+
+                puntajesSomm.push(puntSomm)
+                puntajesGen.push(puntGen)
+            }
+
+            iteradorResena.siguiente()
+            
+        }
+        return {puntajesGen, puntajesSomm}
+    }
 }

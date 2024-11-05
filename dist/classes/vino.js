@@ -1,3 +1,4 @@
+import { IteradorResena } from "./iteradorResena.js";
 export class Vino {
     anada;
     imagenEtiqueta;
@@ -39,30 +40,18 @@ export class Vino {
     getPrecioSugerido() {
         return this.precioArs;
     }
-    conocerResenasEnPeriodo(desde, hasta) {
-        let puntajes = [];
-        for (let i = 0; i < this.resena.length; i++) {
-            let esSommelier = this.resena[i].sosDeSommelier();
-            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta);
-            if (esSommelier && esDePeriodo) {
-                let punt = this.resena[i].getPuntaje();
-                puntajes.push(punt);
-            }
-        }
-        return puntajes;
-    }
-    conocerResenasEnPeriodoGral(desde, hasta) {
-        let puntajes = [];
-        for (let i = 0; i < this.resena.length; i++) {
-            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta);
-            console.log('es de per', esDePeriodo);
-            if (esDePeriodo) {
-                let punt = this.resena[i].getPuntaje();
-                puntajes.push(punt);
-            }
-        }
-        return puntajes;
-    }
+    // conocerResenasEnPeriodo(desde:string, hasta:string){
+    //     let puntajes = []
+    //     for(let i=0; i< this.resena.length; i ++){
+    //         let esSommelier = this.resena[i].sosDeSommelier()
+    //         let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
+    //         if(esSommelier && esDePeriodo){
+    //             let punt = this.resena[i].getPuntaje()
+    //             puntajes.push(punt)
+    //         }
+    //     }
+    //     return puntajes
+    // }
     buscarDatosBodega() {
         const nombreBodega = this.bodega.getNombre();
         // el regionProvPais es un obtejo
@@ -77,6 +66,19 @@ export class Vino {
         }
         return varietales;
     }
+    // a esta no se usa mas, por el iterador
+    conocerResenasEnPeriodoGral(desde, hasta) {
+        let puntajes = [];
+        for (let i = 0; i < this.resena.length; i++) {
+            let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta);
+            console.log('es de per', esDePeriodo);
+            if (esDePeriodo) {
+                let punt = this.resena[i].getPuntaje();
+                puntajes.push(punt);
+            }
+        }
+        return puntajes;
+    }
     conocerResenas(desde, hasta) {
         let puntajesGral = [];
         for (let i = 0; i < this.resena.length; i++) {
@@ -87,5 +89,26 @@ export class Vino {
             }
         }
         return puntajesGral;
+    }
+    crearIterador(resena, filtro) {
+        return new IteradorResena(resena, filtro);
+    }
+    conocerResenasEnPeriodo(desde, hasta) {
+        let puntajesSomm = [];
+        let puntajesGen = [];
+        // Iteradot
+        let iteradorResena = this.crearIterador(this.resena, [desde, hasta]);
+        iteradorResena.primero();
+        while (iteradorResena.haTerminado() == false) {
+            let resenaActual = iteradorResena.elementoActual();
+            if (resenaActual) {
+                let puntGen = resenaActual.getPuntaje();
+                let puntSomm = resenaActual.getPuntajeSomm();
+                puntajesSomm.push(puntSomm);
+                puntajesGen.push(puntGen);
+            }
+            iteradorResena.siguiente();
+        }
+        return { puntajesGen, puntajesSomm };
     }
 }

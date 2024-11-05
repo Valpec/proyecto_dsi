@@ -1,10 +1,12 @@
 import { GestorReporteRankingVinos } from "./classes/gestorReporteRankingVinos.js";
+//CAMBIAR -- reemplazar array por api
 import { vinosArray } from "./arrayVinos.js";
 // instancia del gestor al que le paso los metodos
 let gestorReporte = new GestorReporteRankingVinos(vinosArray);
 export function tomarConfirmacionGenerarReporte(reporte) {
     let datosReporte = reporte;
     let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    console.log(topDiez);
     return topDiez;
 }
 ;

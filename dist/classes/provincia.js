@@ -1,7 +1,7 @@
 export class Provincia {
     nombre;
     regiones = [];
-    pais = null;
+    paises = [];
     // constructor(nombre: string, regiones: RegionVitivinicola[]) {
     //     this.nombre = nombre;  
     //     this.regiones = regiones      
@@ -18,12 +18,13 @@ export class Provincia {
         region.establecerProvincia(this);
     }
     establecerPais(pais) {
-        this.pais = pais;
+        this.paises.push(pais);
     }
     getNombre() {
         return this.nombre;
     }
     obtenerPais() {
-        return this.pais?.getNombre();
+        // return this.pais?.getNombre()
+        return this.nombre;
     }
 }

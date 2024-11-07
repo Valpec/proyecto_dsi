@@ -5,8 +5,8 @@ import { Vino } from "./vino.js";
 // contrato de la estructura que se devuelve de los vinos con los datos necesarios para mostrarlo en pantalla/excel
 interface RegionProvinciaPais {
     region: string;
-    provincia?: string;  // Asumiendo que tal vez también quieras tener una propiedad opcional de provincia
-    pais?: string;       // Asumiendo que tal vez también quieras tener una propiedad opcional de país
+    provincia?: string;  
+    pais?: string;       
 }
 
 interface DatosBodega {
@@ -26,15 +26,15 @@ export interface VinoEncontrado {
     varietales: string[];
 }
 export class GestorReporteRankingVinos<T> {
-    // private vinos: T[];
     private vinos: Vino[]
+
     constructor(vinos: Vino[],) {
         this.vinos = vinos;
     }
 
     generarRankingVinos() {
         // se supone que este metodo es el triggereado por el usuario en el momento que se ejecuta el boton de generar ranking de vinos
-        // quisiera impleemntar aca un window.replace, como para decir que hace algo, pero sinceramente descnozco que tanto romperia la cabeza hacer eso
+        // lo hace el front
     }
     //dos. a esta creo qu no la uso, la validacion la hace el front
     validarPeriodo(desde: string, hasta: string) {
@@ -48,19 +48,15 @@ export class GestorReporteRankingVinos<T> {
         }
     }
 
-    //no tiene codigo, por el camino feliz se estima que solo se toma excel, y que el tipo de resena es de somm
-    // dos. agregar codigo para id el tipo de resena y el de visualizacion
+    //no tiene codigo, de esto se encarga la pantalla y app.ts
     tomarTipoResena() { }
     tomarTipoVisualizacion() { }
 
     tomarConfirmacionGenerarReporte(datosReporte:Reporte, vinosArray:Vino[]) {
-        // const vinosEncontrados =  this.buscarVinosEnPeriodoConResenas(datosReporte.fechaDesde, datosReporte.fechaHasta, datosReporte.tipoResena, vinosArray)
-        
-        // dos. PARA ITERADOR ES ESTE
+        console.log('entra')
         const vinosEncontrados =  this.buscarVinosEnPeriodoConResenas(datosReporte, vinosArray)
 
         const topDiez = this.ordenarVinosPorCalificacion(vinosEncontrados)
-        // const topDiez: [] = []
         return topDiez
     }
 
@@ -88,7 +84,6 @@ export class GestorReporteRankingVinos<T> {
     //         const datosBodega = vinos[i].buscarDatosBodega()
     //         // estructura ---> {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
     //         const varietales = vinos[i].buscarVarietal()
-    //         // estructura --->[desc1, desc2, desc3]
 
     //         const datosVino = { nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales }
     //         vinosEncontrados.push(datosVino)
@@ -101,6 +96,8 @@ export class GestorReporteRankingVinos<T> {
     //     return vinosEncontrados
     // }
 
+
+    // dos. estas dos funciones son iguales, le podria cambiar el nombre y hacer una sola, pero no seguiria analisis
     calcularPromCalificacionPorSommelier(puntajes: number[]) {
         let sumatoria = puntajes.reduce((sum, current) => sum + current, 0)
         let promedio = (sumatoria / puntajes.length)
@@ -149,10 +146,10 @@ export class GestorReporteRankingVinos<T> {
         return new IteradorVino(vinosArray);
     }
 
-    // tipoResena deberia ir ...?, estaba como default por el cu pero hay que agrgarolo
+   
     buscarVinosEnPeriodoConResenas(datosReporte: Reporte, vinosArray: Vino[]) {
         let vinosEncontrados = []
-
+        
         let iteradorVino = this.crearIterador(vinosArray)
 
         iteradorVino.primero()
@@ -160,7 +157,6 @@ export class GestorReporteRankingVinos<T> {
 
             let vinoActual = iteradorVino.elementoActual()
 
-            //modificar la funcion para que no devuelva el puntaje, si no que las de a las res
             // resenas en periodo es un objeto de arrays {puntajesGen, puntajesSOmm}
             let resenasEnPeriodo = vinoActual.conocerResenasEnPeriodo(datosReporte.fechaDesde, datosReporte.fechaHasta)
             if(resenasEnPeriodo.puntajesSomm.length === 0){
@@ -168,13 +164,14 @@ export class GestorReporteRankingVinos<T> {
                 continue
             }
 
-            // VLAIDAR TIPO RESENA A A A A
             const promedioSomm = this.calcularPromCalificacionPorSommelier(resenasEnPeriodo.puntajesSomm)
             const promedioGral = this.calcularPromCalificacionGeneral(resenasEnPeriodo.puntajesGen)
 
             const nombreVino = vinoActual.getNombre()
             const precioSugeridoVino = vinoActual.getPrecioSugerido()
             const varietales = vinoActual.buscarVarietal()
+            // estructura --->[desc1, desc2, desc3]
+
             const datosBodega = vinoActual.buscarDatosBodega()
 
             const datosVino = {nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales}

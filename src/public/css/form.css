@@ -34,7 +34,7 @@
     border-radius: 0.21875rem; /* 3.5px / 16 */
 }
 
-#msjCancelacion, #msjError {
+#msjCancelacion, #msjError, #msjAlt {
     display: none;
     width: 37.5rem; /* 600px / 16 */
     margin: 3.125rem auto; /* 50px / 16 */

@@ -1,14 +1,14 @@
 import { RegionVitivinicola } from "./regionVitivinicola.js";
 export class Bodega {
 
-    private coordenadasUbicacion: string[];
+    private coordenadasUbicacion: string;
     private descripcion: string;
     private historia: string;
     private nombre: string;
     private periodoActualizacion: string;
     private regionVitivinicola: RegionVitivinicola;
 
-    constructor(coordenadasUbicacion: string[], descripcion: string, historia: string, nombre: string, periodoActualizacion: string, region: RegionVitivinicola) {
+    constructor(coordenadasUbicacion: string, descripcion: string, historia: string, nombre: string, periodoActualizacion: string, region: RegionVitivinicola) {
         this.coordenadasUbicacion = coordenadasUbicacion;
         this.descripcion = descripcion;
         this.historia = historia;

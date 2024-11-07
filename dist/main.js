@@ -1,11 +1,19 @@
 import { GestorReporteRankingVinos } from "./classes/gestorReporteRankingVinos.js";
-//CAMBIAR -- reemplazar array por api
 import { vinosArray } from "./arrayVinos.js";
+import { VinoRepository } from "./repositories/VinoRepository.js";
+const vinoService = new VinoRepository();
+const vinos = await vinoService.getAllVinos();
 // instancia del gestor al que le paso los metodos
-let gestorReporte = new GestorReporteRankingVinos(vinosArray);
+// let gestorReporte = new GestorReporteRankingVinos(vinosArray)
+let gestorReporte = new GestorReporteRankingVinos(vinos);
 export function tomarConfirmacionGenerarReporte(reporte) {
     let datosReporte = reporte;
+    if (datosReporte.formaVisualizacion != '1' || datosReporte.tipoResena != '1') {
+        console.info('No se encuentra disponible la funcionalidad de resporte a estas opciones. Intente para Sommelier y Excel');
+        return [];
+    }
     let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    console.log('TOP DIEEEEZZZ');
     console.log(topDiez);
     return topDiez;
 }
@@ -14,7 +22,7 @@ export function tomarCancelacionGenerarReporte() {
     gestorReporte.tomarCancelacionGenerarReporte();
 }
 export function informarGeneracion(vinos) {
-    // de aca, que muestre en el front en una tabla los vinos en el top 10 con la info solicitada.
+    // front muestra directamente el la tabla
     console.log('Se ha generado correctamente el ranking');
 }
 export function noSeEncuentrasResenasSommelier() {

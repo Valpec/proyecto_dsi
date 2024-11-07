@@ -1,13 +1,12 @@
 import { IteradorVino } from "./iteradorVino.js";
 export class GestorReporteRankingVinos {
-    // private vinos: T[];
     vinos;
     constructor(vinos) {
         this.vinos = vinos;
     }
     generarRankingVinos() {
         // se supone que este metodo es el triggereado por el usuario en el momento que se ejecuta el boton de generar ranking de vinos
-        // quisiera impleemntar aca un window.replace, como para decir que hace algo, pero sinceramente descnozco que tanto romperia la cabeza hacer eso
+        // lo hace el front
     }
     //dos. a esta creo qu no la uso, la validacion la hace el front
     validarPeriodo(desde, hasta) {
@@ -21,16 +20,13 @@ export class GestorReporteRankingVinos {
             console.log('Las fechas son validas');
         }
     }
-    //no tiene codigo, por el camino feliz se estima que solo se toma excel, y que el tipo de resena es de somm
-    // dos. agregar codigo para id el tipo de resena y el de visualizacion
+    //no tiene codigo, de esto se encarga la pantalla y app.ts
     tomarTipoResena() { }
     tomarTipoVisualizacion() { }
     tomarConfirmacionGenerarReporte(datosReporte, vinosArray) {
-        // const vinosEncontrados =  this.buscarVinosEnPeriodoConResenas(datosReporte.fechaDesde, datosReporte.fechaHasta, datosReporte.tipoResena, vinosArray)
-        // dos. PARA ITERADOR ES ESTE
+        console.log('entra');
         const vinosEncontrados = this.buscarVinosEnPeriodoConResenas(datosReporte, vinosArray);
         const topDiez = this.ordenarVinosPorCalificacion(vinosEncontrados);
-        // const topDiez: [] = []
         return topDiez;
     }
     // buscarVinosEnPeriodoConResenas(desde: string, hasta: string, tipoResena: string, vinos: Vino[]) {
@@ -54,7 +50,6 @@ export class GestorReporteRankingVinos {
     //         const datosBodega = vinos[i].buscarDatosBodega()
     //         // estructura ---> {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
     //         const varietales = vinos[i].buscarVarietal()
-    //         // estructura --->[desc1, desc2, desc3]
     //         const datosVino = { nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales }
     //         vinosEncontrados.push(datosVino)
     //     }
@@ -64,6 +59,7 @@ export class GestorReporteRankingVinos {
     //     }
     //     return vinosEncontrados
     // }
+    // dos. estas dos funciones son iguales, le podria cambiar el nombre y hacer una sola, pero no seguiria analisis
     calcularPromCalificacionPorSommelier(puntajes) {
         let sumatoria = puntajes.reduce((sum, current) => sum + current, 0);
         let promedio = (sumatoria / puntajes.length);
@@ -102,26 +98,24 @@ export class GestorReporteRankingVinos {
     crearIterador(vinosArray) {
         return new IteradorVino(vinosArray);
     }
-    // tipoResena deberia ir ...?, estaba como default por el cu pero hay que agrgarolo
     buscarVinosEnPeriodoConResenas(datosReporte, vinosArray) {
         let vinosEncontrados = [];
         let iteradorVino = this.crearIterador(vinosArray);
         iteradorVino.primero();
         while (iteradorVino.haTerminado() == false) {
             let vinoActual = iteradorVino.elementoActual();
-            //modificar la funcion para que no devuelva el puntaje, si no que las de a las res
             // resenas en periodo es un objeto de arrays {puntajesGen, puntajesSOmm}
             let resenasEnPeriodo = vinoActual.conocerResenasEnPeriodo(datosReporte.fechaDesde, datosReporte.fechaHasta);
             if (resenasEnPeriodo.puntajesSomm.length === 0) {
                 iteradorVino.siguiente();
                 continue;
             }
-            // VLAIDAR TIPO RESENA A A A A
             const promedioSomm = this.calcularPromCalificacionPorSommelier(resenasEnPeriodo.puntajesSomm);
             const promedioGral = this.calcularPromCalificacionGeneral(resenasEnPeriodo.puntajesGen);
             const nombreVino = vinoActual.getNombre();
             const precioSugeridoVino = vinoActual.getPrecioSugerido();
             const varietales = vinoActual.buscarVarietal();
+            // estructura --->[desc1, desc2, desc3]
             const datosBodega = vinoActual.buscarDatosBodega();
             const datosVino = { nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales };
             vinosEncontrados.push(datosVino);

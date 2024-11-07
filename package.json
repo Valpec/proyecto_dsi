@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module", 
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,5 +13,11 @@
   "devDependencies": {
     "nodemon": "^3.1.1",
     "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.4.7",
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.20"
   }
 }

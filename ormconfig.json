@@ -1,0 +1,13 @@
+{
+    "type": "sqlite",
+    "host": "localhost",
+    "port": 5500,
+    "database": "db/dbppai.db",
+    "synchronize": false,
+    "logging": false,
+    "entities": ["src/entities/*.ts"],
+    "cli": {
+      "entitiesDir": "src/entities"
+    }
+  }
+  

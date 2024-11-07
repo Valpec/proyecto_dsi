@@ -15,7 +15,6 @@ export class Vino {
     private varietal: Varietal[]
     private bodega: Bodega
 
-
     constructor(anada: number, imagenEtiqueta: string, nombre: string,notaDeCataBodega: string, precioArs: number, maridaje: Maridaje[],varietal: Varietal[], bodega: Bodega) {
         this.anada = anada;
         this.imagenEtiqueta = imagenEtiqueta;
@@ -27,8 +26,8 @@ export class Vino {
         this.bodega = bodega
 
     }
-    agregarResena(resenaNueva:Resena){
 
+    agregarResena(resenaNueva:Resena){
         this.resena.push(resenaNueva)
         resenaNueva.establecerVino(this)
     }
@@ -50,19 +49,7 @@ export class Vino {
     getPrecioSugerido(){
         return this.precioArs
     }
-    // conocerResenasEnPeriodo(desde:string, hasta:string){
-    //     let puntajes = []
-    //     for(let i=0; i< this.resena.length; i ++){
-    //         let esSommelier = this.resena[i].sosDeSommelier()
-    //         let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
 
-    //         if(esSommelier && esDePeriodo){
-    //             let punt = this.resena[i].getPuntaje()
-    //             puntajes.push(punt)
-    //         }
-    //     }
-    //     return puntajes
-    // }
     buscarDatosBodega(){
         const nombreBodega = this.bodega.getNombre()
         // el regionProvPais es un obtejo

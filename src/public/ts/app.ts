@@ -23,6 +23,9 @@ form.addEventListener('submit', function(e) {
     let fechaHasta = (document.getElementById('fechaHasta') as HTMLInputElement).value;
     let tipoResena = (document.getElementById('tipoResena') as HTMLOptionElement).value;
     let formaVisualizacion = (document.getElementById('tipoVisualizacion') as HTMLOptionElement).value
+
+    let msjAlt = document.getElementById('msjAlt') as HTMLElement
+
     validacionFecha(fechaDesde, fechaHasta);
     const reporte: Reporte = {
         fechaDesde: fechaDesde,
@@ -30,9 +33,12 @@ form.addEventListener('submit', function(e) {
         tipoResena: tipoResena,
         formaVisualizacion: formaVisualizacion
     };
+    if(tipoResena != '1' || formaVisualizacion != '1'){
+        msjAlt!.style.display = 'inline'
 
+    }
 
-    console.log(reporte)
+    console.log(reporte)    
     const vec = tomarConfirmacionGenerarReporte(reporte)
     console.log(vec)
 
@@ -96,7 +102,7 @@ function generarTablaVinos(vinos:VinoEncontrado[]){
 
 }
 
-// / Código para el boton de cancelar la operación.
+
 // Código para el botón de cancelar la operación
 window.addEventListener("DOMContentLoaded", () => {
     const botonCancelar = document.getElementById("cancelarGeneracionReporte") as HTMLButtonElement;
@@ -105,7 +111,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const volverAlInicio = document.getElementById("volverInicio") as HTMLButtonElement;
     const tablaContainer = document.getElementById("tablaVinos") as HTMLElement;
 
-    // Verificar que los elementos existen antes de añadir listeners
     if (botonCancelar && formulario && msjCancelacion && volverAlInicio) {
         // Asegurarse de que el mensaje de cancelación esté oculto inicialmente
         msjCancelacion.style.display = "none"

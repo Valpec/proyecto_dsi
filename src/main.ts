@@ -1,10 +1,9 @@
 import { GestorReporteRankingVinos , VinoEncontrado} from "./classes/gestorReporteRankingVinos.js"
 import { vinosArray } from "./arrayVinos.js";
-import { VinoRepository } from "./repositories/VinoRepository.js";
+import { VinoSuperbase } from "./repositories/VinosParseadosService.js";
 
-
-const vinoService = new VinoRepository();
-const vinos = await vinoService.getAllVinos();
+const vinoService = new VinoSuperbase();
+const vinos = await vinoService.getAllVinos()
 // console.log(vinos)
 
 // la estructura que deben respetar los datos pasado como objeto del formulario del html (app.ts para ver como esta documentado)
@@ -27,7 +26,7 @@ export function tomarConfirmacionGenerarReporte(reporte:Reporte){
         console.info('No se encuentra disponible la funcionalidad de resporte a estas opciones. Intente para Sommelier y Excel')
         return []
     }
-    let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinos);
     console.log('TOP DIEEEEZZZ')
     console.log(topDiez)
     return topDiez

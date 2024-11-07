@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
     database: 'db/dbppai.db',
     // synchronize: true,    
     synchronize: false,
-    logging: true,
+    logging: false,
     entities: [
         VinoEntity,
         BodegaEntity,

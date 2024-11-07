@@ -17,65 +17,6 @@ export class VinoRepository {
     bodegaInstances = new Map();
     regionVitivinicolaInstances = new Map();
     tipoUvaInstances = new Map();
-    // private async getPaisInstance(paisEntity: PaisEntity): Promise<Pais> {
-    //     if (!this.cachedPais) {
-    //         this.cachedPais = new Pais(
-    //             paisEntity.nombre
-    //         );
-    //     }
-    //     return this.cachedPais;
-    // }
-    // private async getProvinciaInstance(provinciaEntity: ProvinciaEntity, pais: Pais): Promise<Provincia> {
-    //     if (!this.cachedProvincias.has(provinciaEntity.id)) {
-    //         this.cachedProvincias.set(
-    //             provinciaEntity.id,
-    //             new Provincia(
-    //                 provinciaEntity.nombre
-    //             )
-    //         );
-    //     }
-    //     return this.cachedProvincias.get(provinciaEntity.id)!;
-    // }
-    // private async getRegionInstance(regionEntity: RegionVitivinicolaEntity, provincia: Provincia): Promise<RegionVitivinicola> {
-    //     if (!this.cachedRegiones.has(regionEntity.id)) {
-    //         this.cachedRegiones.set(
-    //             regionEntity.id,
-    //             new RegionVitivinicola(
-    //                 regionEntity.descripcion,
-    //                 regionEntity.nombre
-    //             )
-    //         );
-    //     }
-    //     return this.cachedRegiones.get(regionEntity.id)!;
-    // }
-    // private async getBodegaInstance(bodegaEntity: BodegaEntity, region: RegionVitivinicola): Promise<Bodega> {
-    //     if (!this.cachedBodegas.has(bodegaEntity.id)) {
-    //         this.cachedBodegas.set(
-    //             bodegaEntity.id,
-    //             new Bodega(
-    //                 bodegaEntity.coordenadasUbicacion,
-    //                 bodegaEntity.descripcion,
-    //                 bodegaEntity.historia,
-    //                 bodegaEntity.nombre,
-    //                 bodegaEntity.periodoActualizacion,
-    //                 region
-    //             )
-    //         );
-    //     }
-    //     return this.cachedBodegas.get(bodegaEntity.id)!;
-    // }
-    // private async getTipoUvaInstance(tipoUvaEntity: TipoUvaEntity): Promise<TipoUva> {
-    //     if (!this.cachedTipoUvas.has(tipoUvaEntity.id)) {
-    //         this.cachedTipoUvas.set(
-    //             tipoUvaEntity.id,
-    //             new TipoUva(
-    //                 tipoUvaEntity.descripcion,
-    //                 tipoUvaEntity.nombre
-    //             )
-    //         );
-    //     }
-    //     return this.cachedTipoUvas.get(tipoUvaEntity.id)!;
-    // }
     async getAllVinos() {
         console.log('hola');
         // mover a database ??????  || agregar validacion de que si esta incializada

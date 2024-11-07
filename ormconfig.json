@@ -5,9 +5,9 @@
     "database": "db/dbppai.db",
     "synchronize": false,
     "logging": false,
-    "entities": ["src/entities/*.ts"],
+    "entities": ["dist/entities/*.js"],
     "cli": {
-      "entitiesDir": "src/entities"
+      "entitiesDir": "dist/entities"
     }
   }
   

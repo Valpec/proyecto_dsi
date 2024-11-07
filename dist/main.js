@@ -1,7 +1,6 @@
 import { GestorReporteRankingVinos } from "./classes/gestorReporteRankingVinos.js";
-import { vinosArray } from "./arrayVinos.js";
-import { VinoRepository } from "./repositories/VinoRepository.js";
-const vinoService = new VinoRepository();
+import { VinoSuperbase } from "./repositories/VinosParseadosService.js";
+const vinoService = new VinoSuperbase();
 const vinos = await vinoService.getAllVinos();
 // instancia del gestor al que le paso los metodos
 // let gestorReporte = new GestorReporteRankingVinos(vinosArray)
@@ -12,7 +11,7 @@ export function tomarConfirmacionGenerarReporte(reporte) {
         console.info('No se encuentra disponible la funcionalidad de resporte a estas opciones. Intente para Sommelier y Excel');
         return [];
     }
-    let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinosArray);
+    let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinos);
     console.log('TOP DIEEEEZZZ');
     console.log(topDiez);
     return topDiez;

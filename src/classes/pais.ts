@@ -11,8 +11,9 @@ export class Pais {
         this.nombre = nombre;        
     }
     establecerProvincia(provincia:Provincia){
+        console.log('pushea prov')
         this.provincias.push(provincia)
-        // provincia.establecerPais(this)
+
     }
     
     contarBodegas() {
@@ -20,5 +21,9 @@ export class Pais {
     
     getNombre(){
         return this.nombre
+    }
+
+    tieneProvincia(provincia:Provincia){
+        return this.provincias.some(p => p.getNombre() === provincia.getNombre());
     }
 }

@@ -1,18 +1,21 @@
 import { GestorReporteRankingVinos } from "./classes/gestorReporteRankingVinos.js";
 import { VinoSuperbase } from "./repositories/VinosParseadosService.js";
+let vinos = [];
+let paises = [];
+let provincias = [];
 const vinoService = new VinoSuperbase();
-const vinos = await vinoService.getAllVinos();
+vinos = await vinoService.getAllVinos();
+paises = await vinoService.getAllPaises();
+provincias = await vinoService.getAllProvincias();
 // instancia del gestor al que le paso los metodos
-// let gestorReporte = new GestorReporteRankingVinos(vinosArray)
 let gestorReporte = new GestorReporteRankingVinos(vinos);
 export function tomarConfirmacionGenerarReporte(reporte) {
     let datosReporte = reporte;
     if (datosReporte.formaVisualizacion != '1' || datosReporte.tipoResena != '1') {
-        console.info('No se encuentra disponible la funcionalidad de resporte a estas opciones. Intente para Sommelier y Excel');
+        console.info('No se encuentra disponible la funcionalidad de reporte con estas opciones. Intente para Sommelier y Excel');
         return [];
     }
-    let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinos);
-    console.log('TOP DIEEEEZZZ');
+    let topDiez = gestorReporte.tomarConfirmacionGenerarReporte(datosReporte, vinos, provincias, paises);
     console.log(topDiez);
     return topDiez;
 }

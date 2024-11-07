@@ -9,12 +9,15 @@ export class Pais {
         this.nombre = nombre;
     }
     establecerProvincia(provincia) {
+        console.log('pushea prov');
         this.provincias.push(provincia);
-        // provincia.establecerPais(this)
     }
     contarBodegas() {
     }
     getNombre() {
         return this.nombre;
+    }
+    tieneProvincia(provincia) {
+        return this.provincias.some(p => p.getNombre() === provincia.getNombre());
     }
 }

@@ -40,10 +40,10 @@ export class Vino {
     getPrecioSugerido() {
         return this.precioArs;
     }
-    buscarDatosBodega() {
+    buscarDatosBodega(provincias, paises) {
         const nombreBodega = this.bodega.getNombre();
         // el regionProvPais es un obtejo
-        const regionProvinciaPais = this.bodega.buscarRegionProvinciaPais();
+        const regionProvinciaPais = this.bodega.buscarRegionProvinciaPais(provincias, paises);
         return { nombreBodega, regionProvinciaPais };
     }
     buscarVarietal() {
@@ -59,7 +59,6 @@ export class Vino {
         let puntajes = [];
         for (let i = 0; i < this.resena.length; i++) {
             let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta);
-            console.log('es de per', esDePeriodo);
             if (esDePeriodo) {
                 let punt = this.resena[i].getPuntaje();
                 puntajes.push(punt);
@@ -84,7 +83,7 @@ export class Vino {
     conocerResenasEnPeriodo(desde, hasta) {
         let puntajesSomm = [];
         let puntajesGen = [];
-        // Iteradot
+        // Iterador
         let iteradorResena = this.crearIterador(this.resena, [desde, hasta]);
         iteradorResena.primero();
         while (iteradorResena.haTerminado() == false) {

@@ -28,13 +28,20 @@ export class Provincia {
         // this.paises.push(pais)
     }
 
-
+    tieneRegion(regionNombre: string): boolean {
+        return this.regiones.some(region => region.getNombre() === regionNombre);
+    }
     getNombre(){
         return this.nombre
     }
-    obtenerPais(){
-        // return this.pais?.getNombre()
-        return this.nombre
+    obtenerPais(paises: Pais[]) {
+        console.log('entra al obtener pais de la prov')
+        for (const pais of paises) {
+            if (pais.tieneProvincia(this)) {
+                console.log('pais encontrado', pais)
+                return pais.getNombre();
+            }
+        }
     }
 
 }

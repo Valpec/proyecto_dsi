@@ -53,7 +53,6 @@ function generarTablaVinos(vinos) {
                     <th>Bodega</th>
                     <th>Varietales</th>
                     <th>Region</th>
-                    <th>Provincia<th>
                     <th>Pais</th>
                 </tr>
             </thead>
@@ -72,7 +71,6 @@ function generarTablaVinos(vinos) {
                     <td>${datosBodega.nombreBodega}</td>
                     <td>${varietales}</td>
                     <td>${Region.region}</td>
-                    <td>${Region.provincia ?? 'N/A'}</td>
                     <td>${Region.pais ?? 'N/A'}</td>
                 </tr>
             `;
@@ -95,6 +93,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // Asegurarse de que el mensaje de cancelación esté oculto inicialmente
         msjCancelacion.style.display = "none";
         botonCancelar.addEventListener("click", () => {
+            console.log('cancela');
             tablaContainer.style.display = "none";
             formulario.style.display = "none"; // Oculta el formulario
             // formulario.classList.add("oculto"); //oculata el form

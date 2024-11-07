@@ -1,12 +1,14 @@
 import { Reporte } from "../main.js";
 import { IteradorVino } from "./iteradorVino.js";
+import { Pais } from "./pais.js";
+import { Provincia } from "./provincia.js";
 import { Vino } from "./vino.js";
 
 // contrato de la estructura que se devuelve de los vinos con los datos necesarios para mostrarlo en pantalla/excel
 interface RegionProvinciaPais {
     region: string;
-    provincia?: string;  
-    pais?: string;       
+    // provincia?: string;  
+    pais?: string | null ;       
 }
 
 interface DatosBodega {
@@ -52,61 +54,23 @@ export class GestorReporteRankingVinos<T> {
     tomarTipoResena() { }
     tomarTipoVisualizacion() { }
 
-    tomarConfirmacionGenerarReporte(datosReporte:Reporte, vinosArray:Vino[]) {
-        console.log('entra')
-        const vinosEncontrados =  this.buscarVinosEnPeriodoConResenas(datosReporte, vinosArray)
+    tomarConfirmacionGenerarReporte(datosReporte:Reporte, vinosArray:Vino[], provincias:Provincia[], paises:Pais[]) {
+        const vinosEncontrados =  this.buscarVinosEnPeriodoConResenas(datosReporte, vinosArray, provincias, paises)
 
         const topDiez = this.ordenarVinosPorCalificacion(vinosEncontrados)
         return topDiez
     }
 
-
-    // buscarVinosEnPeriodoConResenas(desde: string, hasta: string, tipoResena: string, vinos: Vino[]) {
-    //     let vinosEncontrados: VinoEncontrado[] = []
-    //     console.log(JSON.stringify(vinosEncontrados))
-    //     for (let i = 0; i < vinos.length; i++) {
-    //         // la variable puntajes es de los sommelier. El puntaje gral, de los somm, amigos, normal. Son arrays de puntajes
-    //         let puntajes = vinos[i].conocerResenasEnPeriodo(desde, hasta)
-    //         let puntajesGrales = vinos[i].conocerResenasEnPeriodoGral(desde, hasta)
-    //         if (puntajes.length === 0) {
-    //             continue
-    //         }
-    //         // me fijo si el tipo de resena es uno, porque ese es el valor que se definio para el sommelier en los values. del form del html VER
-    //         // CAMBIAR -- si hay que agregar este tipo de re
-    //         // if(tipoResena === '1'){
-    //         const promedioSomm = this.calcularPromCalificacionPorSommelier(puntajes)
-    //         // }
-    //         const promedioGral = this.calcularPromCalificacionGeneral(puntajesGrales)
-
-    //         const nombreVino = vinos[i].getNombre()
-    //         const precioSugeridoVino = vinos[i].getPrecioSugerido()
-
-    //         const datosBodega = vinos[i].buscarDatosBodega()
-    //         // estructura ---> {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
-    //         const varietales = vinos[i].buscarVarietal()
-
-    //         const datosVino = { nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales }
-    //         vinosEncontrados.push(datosVino)
-
-    //     }
-    //     console.log(JSON.stringify(vinosEncontrados))
-    //     if (vinosEncontrados.length === 0) {
-    //         this.informarSituacion("No se encontraron vinos con resena de sommelier")
-    //     }
-    //     return vinosEncontrados
-    // }
-
-
     // dos. estas dos funciones son iguales, le podria cambiar el nombre y hacer una sola, pero no seguiria analisis
     calcularPromCalificacionPorSommelier(puntajes: number[]) {
         let sumatoria = puntajes.reduce((sum, current) => sum + current, 0)
-        let promedio = (sumatoria / puntajes.length)
+        let promedio = parseFloat((sumatoria / puntajes.length).toFixed(2))
         return promedio
     }
 
     calcularPromCalificacionGeneral(puntajesGral: number[]) {
         let sumatoria = puntajesGral.reduce((sum, current) => sum + current, 0)
-        let promedio = (sumatoria / puntajesGral.length)
+        let promedio = parseFloat((sumatoria / puntajesGral.length).toFixed(2))
 
         return promedio
     }
@@ -140,14 +104,13 @@ export class GestorReporteRankingVinos<T> {
     }
 
 
-
     //Iterator
     crearIterador(vinosArray: Vino[]) {
         return new IteradorVino(vinosArray);
     }
 
    
-    buscarVinosEnPeriodoConResenas(datosReporte: Reporte, vinosArray: Vino[]) {
+    buscarVinosEnPeriodoConResenas(datosReporte: Reporte, vinosArray: Vino[], provincias: Provincia[], paises: Pais[]) {
         let vinosEncontrados = []
         
         let iteradorVino = this.crearIterador(vinosArray)
@@ -169,10 +132,11 @@ export class GestorReporteRankingVinos<T> {
 
             const nombreVino = vinoActual.getNombre()
             const precioSugeridoVino = vinoActual.getPrecioSugerido()
-            const varietales = vinoActual.buscarVarietal()
             // estructura --->[desc1, desc2, desc3]
-
-            const datosBodega = vinoActual.buscarDatosBodega()
+            const varietales = vinoActual.buscarVarietal()
+            // estructura ---> {nombreBodega: aa, regionProvinciaPais: {region:aa, provincia: aa, pais:aa}}
+            // DEPENDENCIA  = pasar array con provincias y array con pais
+            const datosBodega = vinoActual.buscarDatosBodega(provincias, paises)
 
             const datosVino = {nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales}
             vinosEncontrados.push(datosVino)

@@ -1,7 +1,5 @@
 {
     "type": "sqlite",
-    "host": "localhost",
-    "port": 5500,
     "database": "db/dbppai.db",
     "synchronize": false,
     "logging": false,

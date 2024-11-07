@@ -14,6 +14,45 @@ export class VinoSuperbase {
     bodegaInstances = new Map();
     regionVitivinicolaInstances = new Map();
     tipoUvaInstances = new Map();
+    async getAllPaises() {
+        const { data: paisesEntities, error } = await supabase
+            .from('pais')
+            .select(`
+            *,
+            provincia: provincia (*)
+           
+        `);
+        if (error) {
+            console.error("Error al obtener los países:", error);
+            return [];
+        }
+        const paises = paisesEntities.map((paisEntity) => {
+            // Obtener instancia única de Pais usando getPaisInstance
+            const pais = this.getPaisInstance(paisEntity);
+            // Iterar sobre las provincias y establecerlas en el país usando getProvinciaInstance
+            paisEntity.provincia.forEach((provinciaEntity) => {
+                const provincia = this.getProvinciaInstance(provinciaEntity); // Obtener instancia única de Provincia
+                pais.establecerProvincia(provincia); // Asociar la provincia con el país, evitando duplicados
+            });
+            return pais;
+        });
+        return paises;
+    }
+    async getAllProvincias() {
+        const { data: provinciasEntities, error } = await supabase
+            .from('provincia')
+            .select(`
+                *,
+                pais: pais (*),
+                regionVitivinicola: regionvitivinicola (*)
+            `);
+        if (error) {
+            console.error("Error al obtener las provincias:", error);
+            return [];
+        }
+        const provincias = provinciasEntities.map((provinciaEntity) => this.getProvinciaInstance(provinciaEntity));
+        return provincias;
+    }
     async getAllVinos() {
         const { data: vinosEntities, error } = await supabase
             .from('vino')
@@ -37,32 +76,21 @@ export class VinoSuperbase {
             console.error("Error al obtener los vinos:", error);
             return [];
         }
-        // console.log('lo que trae la bd', vinosEntities);
-        // const vinos: Vino[] = await Promise.all(vinosEntities.map(vinoEntity => this.mapToVino(vinoEntity)));
-        const vinos = vinosEntities;
+        const vinos = await Promise.all(vinosEntities.map((vinoEntity) => this.mapToVino(vinoEntity)));
         console.log('el vino arreglado', vinos);
         return vinos;
     }
     async mapToVino(vinoEntity) {
-        // Verifica si el objeto bodega está presente y tiene los datos
         const bodega = this.getBodegaInstance(vinoEntity.bodega);
-        // Mapeo de varietales
         const varietales = vinoEntity.varietal.map((varietalEntity) => {
             const tipoUva = this.getTipoUvaInstance(varietalEntity.tipouva);
-            return new Varietal(varietalEntity.descripcion, varietalEntity.porcentajeComposicion, tipoUva);
+            return new Varietal(varietalEntity.descripcion, varietalEntity.porcentajecomposicion, tipoUva);
         });
-        // Mapeo de maridajes
-        // const maridajes = vinoEntity.maridaje.map((maridajeEntity: any) => 
-        //     new Maridaje(maridajeEntity.descripcion, maridajeEntity.nombre)
-        // );
         const maridajes = Array.isArray(vinoEntity.maridaje)
             ? vinoEntity.maridaje.map((maridajeEntity) => new Maridaje(maridajeEntity.descripcion, maridajeEntity.nombre))
             : [];
-        // Mapeo de reseñas
-        const resenas = vinoEntity.resena.map((resenaEntity) => new Resena(resenaEntity.comentario, resenaEntity.premium, resenaEntity.fechaResena, resenaEntity.puntaje));
-        // Creación del vino
+        const resenas = vinoEntity.resena.map((resenaEntity) => new Resena(resenaEntity.comentario, resenaEntity.premium, resenaEntity.fecharesena, resenaEntity.puntaje));
         const vino = new Vino(vinoEntity.anada, vinoEntity.imagenetiqueta, vinoEntity.nombre, vinoEntity.notadecatabodega, vinoEntity.precioars, maridajes, varietales, bodega);
-        // Asignación de reseñas al vino
         resenas.forEach((resena) => vino.agregarResena(resena));
         return vino;
     }

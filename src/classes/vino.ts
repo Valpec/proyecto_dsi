@@ -3,6 +3,8 @@ import { Resena } from "./resena.js";
 import { Varietal } from "./varietal.js";
 import { Bodega } from "./bodega.js";
 import { IteradorResena } from "./iteradorResena.js";
+import { Provincia } from "./provincia.js";
+import { Pais } from "./pais.js";
 export class Vino {
 
     private anada: number;
@@ -50,10 +52,10 @@ export class Vino {
         return this.precioArs
     }
 
-    buscarDatosBodega(){
+    buscarDatosBodega(provincias: Provincia[], paises: Pais[]){
         const nombreBodega = this.bodega.getNombre()
         // el regionProvPais es un obtejo
-        const regionProvinciaPais = this.bodega.buscarRegionProvinciaPais()
+        const regionProvinciaPais = this.bodega.buscarRegionProvinciaPais(provincias, paises)
         
         return {nombreBodega, regionProvinciaPais}
     }
@@ -72,8 +74,6 @@ export class Vino {
         let puntajes = []
         for(let i=0; i< this.resena.length; i ++){
             let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
-            console.log('es de per', esDePeriodo)
-
             if(esDePeriodo){
                 let punt = this.resena[i].getPuntaje()
                 puntajes.push(punt)
@@ -88,14 +88,12 @@ export class Vino {
 
         for(let i=0; i< this.resena.length; i ++){
             let esDePeriodo = this.resena[i].esEnPeriodoFecha(desde, hasta)
-
             if(esDePeriodo){
                 let punt = this.resena[i].getPuntaje()
                 puntajesGral.push(punt)
             }
         }
         return puntajesGral
-
     }
 
     crearIterador(resena:Resena[], filtro:string[]){
@@ -105,7 +103,7 @@ export class Vino {
     conocerResenasEnPeriodo(desde:string, hasta: string){
         let puntajesSomm = []
         let puntajesGen = []
-        // Iteradot
+        // Iterador
         let iteradorResena = this.crearIterador(this.resena, [desde, hasta]);
         iteradorResena.primero()
         while(iteradorResena.haTerminado() == false){
@@ -118,9 +116,7 @@ export class Vino {
                 puntajesSomm.push(puntSomm)
                 puntajesGen.push(puntGen)
             }
-
             iteradorResena.siguiente()
-            
         }
         return {puntajesGen, puntajesSomm}
     }

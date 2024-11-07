@@ -67,7 +67,6 @@ function generarTablaVinos(vinos:VinoEncontrado[]){
                     <th>Bodega</th>
                     <th>Varietales</th>
                     <th>Region</th>
-                    <th>Provincia<th>
                     <th>Pais</th>
                 </tr>
             </thead>
@@ -87,7 +86,6 @@ function generarTablaVinos(vinos:VinoEncontrado[]){
                     <td>${datosBodega.nombreBodega}</td>
                     <td>${varietales}</td>
                     <td>${Region.region}</td>
-                    <td>${Region.provincia ?? 'N/A' }</td>
                     <td>${Region.pais ?? 'N/A'}</td>
                 </tr>
             `;
@@ -116,6 +114,7 @@ window.addEventListener("DOMContentLoaded", () => {
         msjCancelacion.style.display = "none"
 
         botonCancelar.addEventListener("click", () => {
+            console.log('cancela')
             tablaContainer.style.display= "none"
             formulario.style.display = "none" // Oculta el formulario
             // formulario.classList.add("oculto"); //oculata el form

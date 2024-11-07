@@ -16,6 +16,50 @@ export class VinoSuperbase {
     private regionVitivinicolaInstances: Map<number, RegionVitivinicola> = new Map();
     private tipoUvaInstances: Map<number, TipoUva> = new Map();
 
+    async getAllPaises(): Promise<Pais[]> {
+        const { data: paisesEntities, error } = await supabase
+            .from('pais')
+            .select(`
+            *,
+            provincia: provincia (*)
+           
+        `);
+
+        if (error) {
+            console.error("Error al obtener los países:", error);
+            return [];
+        }
+
+        const paises = paisesEntities.map((paisEntity: any) => {
+            const pais = this.getPaisInstance(paisEntity);
+            paisEntity.provincia.forEach((provinciaEntity: any) => {
+                const provincia = this.getProvinciaInstance(provinciaEntity); 
+                pais.establecerProvincia(provincia); 
+            });
+    
+            return pais;
+        });
+        return paises;
+    }
+
+    async getAllProvincias(): Promise<Provincia[]> {
+        const { data: provinciasEntities, error } = await supabase
+            .from('provincia')
+            .select(`
+                *,
+                pais: pais (*),
+                regionVitivinicola: regionvitivinicola (*)
+            `);
+
+        if (error) {
+            console.error("Error al obtener las provincias:", error);
+            return [];
+        }
+
+        const provincias = provinciasEntities.map((provinciaEntity: any) => this.getProvinciaInstance(provinciaEntity));
+        return provincias;
+    }
+
     async getAllVinos(): Promise<Vino[]> {
         const { data: vinosEntities, error } = await supabase
             .from('vino')
@@ -40,36 +84,25 @@ export class VinoSuperbase {
             console.error("Error al obtener los vinos:", error);
             return [];
         }
-        // console.log('lo que trae la bd', vinosEntities);
-        // const vinos: Vino[] = await Promise.all(vinosEntities.map(vinoEntity => this.mapToVino(vinoEntity)));
-        const vinos = vinosEntities
+        const vinos: Vino[] = await Promise.all(vinosEntities.map((vinoEntity: any) => this.mapToVino(vinoEntity)));
         console.log('el vino arreglado', vinos)
         return vinos;
     }
 
     private async mapToVino(vinoEntity: any): Promise<Vino> {
-        // Verifica si el objeto bodega está presente y tiene los datos
         const bodega = this.getBodegaInstance(vinoEntity.bodega);
 
-        // Mapeo de varietales
         const varietales = vinoEntity.varietal.map((varietalEntity: any) => {
             const tipoUva = this.getTipoUvaInstance(varietalEntity.tipouva);
-            return new Varietal(varietalEntity.descripcion, varietalEntity.porcentajeComposicion, tipoUva);
+            return new Varietal(varietalEntity.descripcion, varietalEntity.porcentajecomposicion, tipoUva);
         });
-
-        // Mapeo de maridajes
-        // const maridajes = vinoEntity.maridaje.map((maridajeEntity: any) => 
-        //     new Maridaje(maridajeEntity.descripcion, maridajeEntity.nombre)
-        // );
         const maridajes = Array.isArray(vinoEntity.maridaje)
             ? vinoEntity.maridaje.map((maridajeEntity: any) => new Maridaje(maridajeEntity.descripcion, maridajeEntity.nombre))
             : [];
-        // Mapeo de reseñas
         const resenas = vinoEntity.resena.map((resenaEntity: any) =>
-            new Resena(resenaEntity.comentario, resenaEntity.premium, resenaEntity.fechaResena, resenaEntity.puntaje)
+            new Resena(resenaEntity.comentario, resenaEntity.premium, resenaEntity.fecharesena, resenaEntity.puntaje)
         );
 
-        // Creación del vino
         const vino = new Vino(
             vinoEntity.anada,
             vinoEntity.imagenetiqueta,
@@ -81,7 +114,6 @@ export class VinoSuperbase {
             bodega
         );
 
-        // Asignación de reseñas al vino
         resenas.forEach((resena: Resena) => vino.agregarResena(resena));
 
         return vino;
@@ -90,6 +122,7 @@ export class VinoSuperbase {
     private getPaisInstance(paisEntity: any): Pais {
         if (!this.paisInstance) {
             this.paisInstance = new Pais(paisEntity.nombre);
+
         }
         return this.paisInstance;
     }

@@ -26,7 +26,6 @@ export class IteradorResena {
     // el filtro para las resenas es que se hayan realizado en el periodo ingresado y que hayan sido hechas por un sommelier 
     comprobarFiltro(filtro) {
         let elemActual = this.listaResena[this.actual];
-        console.log('desde iteradorResena, filtros ', filtro[0], filtro[1]);
         if (elemActual.esEnPeriodoFecha(filtro[0], filtro[1]) && elemActual.sosDeSommelier()) {
             return true;
         }

@@ -82,28 +82,24 @@ function generarTablaVinos(vinos) {
         console.error('No se encontró ningún elemento con el id "tablaVinos"');
     }
 }
-// Código para el botón de cancelar la operación
-window.addEventListener("DOMContentLoaded", () => {
-    const botonCancelar = document.getElementById("cancelarGeneracionReporte");
-    const formulario = document.getElementById("reporteForm");
-    const msjCancelacion = document.getElementById("msjCancelacion");
-    const volverAlInicio = document.getElementById("volverInicio");
-    const tablaContainer = document.getElementById("tablaVinos");
-    if (botonCancelar && formulario && msjCancelacion && volverAlInicio) {
-        // Asegurarse de que el mensaje de cancelación esté oculto inicialmente
-        msjCancelacion.style.display = "none";
-        botonCancelar.addEventListener("click", () => {
-            console.log('cancela');
-            tablaContainer.style.display = "none";
-            formulario.style.display = "none"; // Oculta el formulario
-            // formulario.classList.add("oculto"); //oculata el form
-            msjCancelacion.style.display = "block"; // Muestra el mensaje de cancelación
-        });
-        volverAlInicio.addEventListener("click", () => {
-            window.location.href = "index.html"; // Redirige al índice
-        });
-    }
-    else {
-        console.error("Error: Uno o más elementos necesarios no se encontraron en el DOM.");
-    }
-});
+// Selecciona el botón de cancelar y los elementos que se ocultan o muestran
+const botonCancelar = document.getElementById("cancelarGeneracionReporte");
+const formulario = document.getElementById("reporteForm");
+const msjCancelacion = document.getElementById("msjCancelacion");
+const volverAlInicio = document.getElementById("volverInicio");
+const tablaContainer = document.getElementById("tablaVinos");
+if (botonCancelar && formulario && msjCancelacion && volverAlInicio && tablaContainer) {
+    msjCancelacion.style.display = "none";
+    botonCancelar.addEventListener("click", () => {
+        console.log('Botón de cancelar presionado');
+        formulario.style.display = "none";
+        tablaContainer.style.display = "none";
+        msjCancelacion.style.display = "block";
+    });
+    volverAlInicio.addEventListener("click", () => {
+        window.location.href = "index.html";
+    });
+}
+else {
+    console.error("Error: Uno o más elementos necesarios no se encontraron en el DOM.");
+}

@@ -1,13 +1,6 @@
 export class Provincia {
     nombre;
     regiones = [];
-    // TRES. COMENTADO
-    // private paises: Pais[] = []
-    // constructor(nombre: string, regiones: RegionVitivinicola[]) {
-    //     this.nombre = nombre;  
-    //     this.regiones = regiones      
-    // }
-    // tres, agregado lo de regiones  en el constructor !
     constructor(nombre) {
         this.nombre = nombre;
     }
@@ -17,10 +10,6 @@ export class Provincia {
     }
     establecerRegion(region) {
         this.regiones.push(region);
-        // region.establecerProvincia(this);
-    }
-    establecerPais(pais) {
-        // this.paises.push(pais)
     }
     tieneRegion(regionNombre) {
         return this.regiones.some(region => region.getNombre() === regionNombre);

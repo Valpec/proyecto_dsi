@@ -1,15 +1,10 @@
 export class Pais {
     nombre;
     provincias = [];
-    // constructor(nombre: string, provincias: Provincia[]) {
-    //     this.nombre = nombre;        
-    //     this.provincias = provincias
-    // }
     constructor(nombre) {
         this.nombre = nombre;
     }
     establecerProvincia(provincia) {
-        console.log('pushea prov');
         this.provincias.push(provincia);
     }
     contarBodegas() {

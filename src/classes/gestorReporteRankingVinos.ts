@@ -1,32 +1,9 @@
-import { Reporte } from "../main.js";
+import { Reporte } from "../public/ts/app.js";
 import { IteradorVino } from "./iteradorVino.js";
 import { Pais } from "./pais.js";
 import { Provincia } from "./provincia.js";
 import { Vino } from "./vino.js";
 
-// contrato de la estructura que se devuelve de los vinos con los datos necesarios para mostrarlo en pantalla/excel
-interface RegionProvinciaPais {
-    region: string;
-    // provincia?: string;  
-    pais?: string | null ;       
-}
-
-interface DatosBodega {
-    nombreBodega: string;
-    regionProvinciaPais: RegionProvinciaPais;
-}
-
-interface RegionProvinciaPais {
-    region: string;
-}
-export interface VinoEncontrado {
-    nombreVino: string;
-    promedioSomm: number;
-    promedioGral: number;
-    precioSugeridoVino: number;
-    datosBodega: DatosBodega;
-    varietales: string[];
-}
 export class GestorReporteRankingVinos<T> {
     private vinos: Vino[]
 
@@ -75,8 +52,8 @@ export class GestorReporteRankingVinos<T> {
         return promedio
     }
 
-    ordenarVinosPorCalificacion(vinosEncontrados: VinoEncontrado[]) {
-        let vinosOrdenados = vinosEncontrados.sort((a, b) => b.promedioSomm - a.promedioSomm)
+    ordenarVinosPorCalificacion(vinosEncontrados: any) {
+        let vinosOrdenados = vinosEncontrados.sort((a: any, b: any) => b.promedioSomm - a.promedioSomm)
         console.log('Cantidad vinos encontrados:', vinosOrdenados.length)
         let topDiez = vinosOrdenados.splice(0, 10)
         return topDiez

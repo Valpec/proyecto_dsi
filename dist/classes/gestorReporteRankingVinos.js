@@ -1,6 +1,8 @@
 import { IteradorVino } from "./iteradorVino.js";
+import * as XLSX from 'xlsx';
 export class GestorReporteRankingVinos {
     vinos;
+    // private vinosEncontrados: VinoEncontrado[];
     constructor(vinos) {
         this.vinos = vinos;
     }
@@ -45,8 +47,16 @@ export class GestorReporteRankingVinos {
         let topDiez = vinosOrdenados.splice(0, 10);
         return topDiez;
     }
-    generarReporte() {
+    generarReporte(data) {
         // deberia haber un metodo de generarReporteTop10 de la pantalla del excel
+        // const data: VinoEncontrado[] = this.vinosEncontrados;
+        // Convertir los datos a una hoja de trabajo
+        const ws = XLSX.utils.json_to_sheet(data);
+        // Crear un libro de trabajo y agregar la hoja de trabajo
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Top 10');
+        // Guardar el archivo en formato .xlsx
+        XLSX.writeFile(wb, 'reporteRankingVinos.xlsx');
     }
     // ALTERNATIVA UNO
     tomarCancelacionGenerarReporte() {

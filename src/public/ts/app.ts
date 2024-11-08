@@ -1,6 +1,6 @@
 import { tomarConfirmacionGenerarReporte, tomarCancelacionGenerarReporte } from "../../main.js";
 
-interface VinoEncontrado {
+export interface VinoEncontrado {
     nombreVino: string;
     promedioSomm: number;
     promedioGral: number;

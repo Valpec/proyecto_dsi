@@ -6,7 +6,7 @@ import { Vino } from "./vino.js";
 
 export class GestorReporteRankingVinos<T> {
     private vinos: Vino[]
-
+    // private vinosEncontrados: VinoEncontrado[];
     constructor(vinos: Vino[],) {
         this.vinos = vinos;
     }
@@ -53,13 +53,14 @@ export class GestorReporteRankingVinos<T> {
     }
 
     ordenarVinosPorCalificacion(vinosEncontrados: any) {
-        let vinosOrdenados = vinosEncontrados.sort((a: any, b: any) => b.promedioSomm - a.promedioSomm)
+        let vinosOrdenados = vinosEncontrados.sort((a: any, b:any) => b.promedioSomm - a.promedioSomm)
         console.log('Cantidad vinos encontrados:', vinosOrdenados.length)
         let topDiez = vinosOrdenados.splice(0, 10)
+
         return topDiez
     }
 
-    generarReporte() {
+    generarReporte(data: any) {
         // deberia haber un metodo de generarReporteTop10 de la pantalla del excel
     }
 

@@ -4,7 +4,6 @@ export class RegionVitivinicola {
 
     private descripcion: string;
     private nombre: string;
-    // private provincia:Provincia | null = null;
 
     constructor(descripcion: string, nombre: string) {
         this.descripcion = descripcion;
@@ -32,9 +31,7 @@ export class RegionVitivinicola {
         }
     }
     buscarPais(provincias: Provincia[], paises: Pais[]){
-        console.log('entra a bsiucar pais, con los paises', paises)
         const provincia = this.obtenerProvincia(provincias);
-        console.log('la provincia encontrada', provincia)
         if (provincia) {
             const pais = provincia.obtenerPais(paises);
             return pais;

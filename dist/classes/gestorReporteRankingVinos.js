@@ -1,8 +1,6 @@
 import { IteradorVino } from "./iteradorVino.js";
-import * as XLSX from 'xlsx';
 export class GestorReporteRankingVinos {
     vinos;
-    // private vinosEncontrados: VinoEncontrado[];
     constructor(vinos) {
         this.vinos = vinos;
     }
@@ -45,18 +43,27 @@ export class GestorReporteRankingVinos {
         let vinosOrdenados = vinosEncontrados.sort((a, b) => b.promedioSomm - a.promedioSomm);
         console.log('Cantidad vinos encontrados:', vinosOrdenados.length);
         let topDiez = vinosOrdenados.splice(0, 10);
+        this.generarReporte(topDiez);
         return topDiez;
     }
     generarReporte(data) {
-        // deberia haber un metodo de generarReporteTop10 de la pantalla del excel
-        // const data: VinoEncontrado[] = this.vinosEncontrados;
-        // Convertir los datos a una hoja de trabajo
-        const ws = XLSX.utils.json_to_sheet(data);
-        // Crear un libro de trabajo y agregar la hoja de trabajo
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Top 10');
-        // Guardar el archivo en formato .xlsx
-        XLSX.writeFile(wb, 'reporteRankingVinos.xlsx');
+        const headers = ['Nombre Vino', 'Promedio Sommelier', 'Promedio General', 'Precio Sugerido', 'Varietales', 'Datos Bodega'];
+        const rows = data.map(row => {
+            return [
+                row.nombreVino,
+                row.promedioSomm,
+                row.promedioGral,
+                row.precioSugeridoVino,
+                row.varietales.join(', '),
+                `${row.datosBodega.nombreBodega}, ${row.datosBodega.regionProvinciaPais.region}, ${row.datosBodega.regionProvinciaPais.pais ?? 'N/A'}`
+            ].join(',');
+        });
+        const csvContent = [headers.join(','), ...rows].join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'reporte';
+        link.click();
     }
     // ALTERNATIVA UNO
     tomarCancelacionGenerarReporte() {

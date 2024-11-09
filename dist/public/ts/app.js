@@ -91,7 +91,6 @@ const tablaContainer = document.getElementById("tablaVinos");
 if (botonCancelar && formulario && msjCancelacion && volverAlInicio && tablaContainer) {
     msjCancelacion.style.display = "none";
     botonCancelar.addEventListener("click", () => {
-        console.log('Botón de cancelar presionado');
         formulario.style.display = "none";
         tablaContainer.style.display = "none";
         msjCancelacion.style.display = "block";

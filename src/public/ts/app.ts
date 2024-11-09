@@ -131,7 +131,6 @@ if (botonCancelar && formulario && msjCancelacion && volverAlInicio && tablaCont
     msjCancelacion.style.display = "none";
 
     botonCancelar.addEventListener("click", () => {
-        console.log('Botón de cancelar presionado');
         formulario.style.display = "none";  
         tablaContainer.style.display = "none"; 
         msjCancelacion.style.display = "block"; 

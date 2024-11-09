@@ -6,7 +6,6 @@ import { Vino } from "./vino.js";
 
 export class GestorReporteRankingVinos<T> {
     private vinos: Vino[]
-    // private vinosEncontrados: VinoEncontrado[];
     constructor(vinos: Vino[],) {
         this.vinos = vinos;
     }
@@ -31,8 +30,8 @@ export class GestorReporteRankingVinos<T> {
     tomarTipoResena() { }
     tomarTipoVisualizacion() { }
 
-    tomarConfirmacionGenerarReporte(datosReporte:Reporte, vinosArray:Vino[], provincias:Provincia[], paises:Pais[]) {
-        const vinosEncontrados =  this.buscarVinosEnPeriodoConResenas(datosReporte, vinosArray, provincias, paises)
+    tomarConfirmacionGenerarReporte(datosReporte: Reporte, vinosArray: Vino[], provincias: Provincia[], paises: Pais[]) {
+        const vinosEncontrados = this.buscarVinosEnPeriodoConResenas(datosReporte, vinosArray, provincias, paises)
 
         const topDiez = this.ordenarVinosPorCalificacion(vinosEncontrados)
         return topDiez
@@ -53,15 +52,32 @@ export class GestorReporteRankingVinos<T> {
     }
 
     ordenarVinosPorCalificacion(vinosEncontrados: any) {
-        let vinosOrdenados = vinosEncontrados.sort((a: any, b:any) => b.promedioSomm - a.promedioSomm)
+        let vinosOrdenados = vinosEncontrados.sort((a: any, b: any) => b.promedioSomm - a.promedioSomm)
         console.log('Cantidad vinos encontrados:', vinosOrdenados.length)
         let topDiez = vinosOrdenados.splice(0, 10)
-
+        this.generarReporte(topDiez)
         return topDiez
     }
 
-    generarReporte(data: any) {
-        // deberia haber un metodo de generarReporteTop10 de la pantalla del excel
+    generarReporte(data: any[]) {
+        const headers = ['Nombre Vino', 'Promedio Sommelier', 'Promedio General', 'Precio Sugerido', 'Varietales', 'Datos Bodega'];
+        const rows = data.map(row => {
+            return [
+                row.nombreVino,
+                row.promedioSomm,
+                row.promedioGral,
+                row.precioSugeridoVino,
+                row.varietales.join(', '),
+                `${row.datosBodega.nombreBodega}, ${row.datosBodega.regionProvinciaPais.region}, ${row.datosBodega.regionProvinciaPais.pais ?? 'N/A'}`
+            ].join(',');
+        });
+        const csvContent = [headers.join(','), ...rows].join('\n')
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'reporte';
+        link.click();
     }
 
     // ALTERNATIVA UNO
@@ -87,10 +103,10 @@ export class GestorReporteRankingVinos<T> {
         return new IteradorVino(vinosArray);
     }
 
-   
+
     buscarVinosEnPeriodoConResenas(datosReporte: Reporte, vinosArray: Vino[], provincias: Provincia[], paises: Pais[]) {
         let vinosEncontrados = []
-        
+
         let iteradorVino = this.crearIterador(vinosArray)
 
         iteradorVino.primero()
@@ -100,7 +116,7 @@ export class GestorReporteRankingVinos<T> {
 
             // resenas en periodo es un objeto de arrays {puntajesGen, puntajesSOmm}
             let resenasEnPeriodo = vinoActual.conocerResenasEnPeriodo(datosReporte.fechaDesde, datosReporte.fechaHasta)
-            if(resenasEnPeriodo.puntajesSomm.length === 0){
+            if (resenasEnPeriodo.puntajesSomm.length === 0) {
                 iteradorVino.siguiente()
                 continue
             }
@@ -116,13 +132,13 @@ export class GestorReporteRankingVinos<T> {
             // DEPENDENCIA  = pasar array con provincias y array con pais
             const datosBodega = vinoActual.buscarDatosBodega(provincias, paises)
 
-            const datosVino = {nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales}
+            const datosVino = { nombreVino, promedioSomm, promedioGral, precioSugeridoVino, datosBodega, varietales }
             vinosEncontrados.push(datosVino)
 
             iteradorVino.siguiente()
         }
 
-        if(vinosEncontrados.length === 0){
+        if (vinosEncontrados.length === 0) {
             this.informarSituacion("no se encontraron vinos con resenas de sommelier")
         }
         console.log(JSON.stringify(vinosEncontrados))

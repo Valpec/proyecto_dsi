@@ -18,10 +18,8 @@ export class Provincia {
         return this.nombre;
     }
     obtenerPais(paises) {
-        console.log('entra al obtener pais de la prov');
         for (const pais of paises) {
             if (pais.tieneProvincia(this)) {
-                console.log('pais encontrado', pais);
                 return pais.getNombre();
             }
         }

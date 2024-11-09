@@ -84,8 +84,9 @@ export class VinoSuperbase {
             console.error("Error al obtener los vinos:", error);
             return [];
         }
+        console.log(vinosEntities)
         const vinos: Vino[] = await Promise.all(vinosEntities.map((vinoEntity: any) => this.mapToVino(vinoEntity)));
-        console.log('el vino arreglado', vinos)
+        console.log('Vinos parseados: ', vinos)
         return vinos;
     }
 
@@ -96,9 +97,11 @@ export class VinoSuperbase {
             const tipoUva = this.getTipoUvaInstance(varietalEntity.tipouva);
             return new Varietal(varietalEntity.descripcion, varietalEntity.porcentajecomposicion, tipoUva);
         });
+
         const maridajes = Array.isArray(vinoEntity.maridaje)
             ? vinoEntity.maridaje.map((maridajeEntity: any) => new Maridaje(maridajeEntity.descripcion, maridajeEntity.nombre))
             : [];
+
         const resenas = vinoEntity.resena.map((resenaEntity: any) =>
             new Resena(resenaEntity.comentario, resenaEntity.premium, resenaEntity.fecharesena, resenaEntity.puntaje)
         );

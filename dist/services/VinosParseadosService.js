@@ -74,8 +74,9 @@ export class VinoSuperbase {
             console.error("Error al obtener los vinos:", error);
             return [];
         }
+        console.log(vinosEntities);
         const vinos = await Promise.all(vinosEntities.map((vinoEntity) => this.mapToVino(vinoEntity)));
-        console.log('el vino arreglado', vinos);
+        console.log('Vinos parseados: ', vinos);
         return vinos;
     }
     async mapToVino(vinoEntity) {

@@ -23,9 +23,7 @@
             <input type="date" id="fechaDesde" name="FechaDesde" required>
             <label for="FechaHasta">Fecha Hasta:</label>
             <input type="date" id="fechaHasta" name="FechaHasta" required>
-            <div id="errorFecha" class="errorForms">
-                Fechas inválidas
-            </div>
+
         </div>
         
         
@@ -48,19 +46,19 @@
         </div>
         
         <div>
-            <button type="submit" id="confirmarGeneracionReporte">Confirmar</button>
-            <button type="button" id="cancelarGeneracionReporte">Cancelar</button>    
+            <button type="submit" id="confirmarGeneracionReporte" class="boton">Confirmar</button>
+            <button type="boton" id="cancelarGeneracionReporte" class="boton" >Cancelar</button>    
         </div>
     </form>
     <div id="msjError">
         <p>No se encontraron vinos para las opciones seleccionadas.</p>
     </div>
     <div id="msjAlt">
-        <p>No se encuentran disponible para la generación de reportes las opciones seleccionadas. Intente para Sommelier y Excel</p>
+        <p>No se encuentran disponible para la generación de reportes las opciones seleccionadas. Intente con: Sommelier y Excel</p>
     </div>
     <div id="msjCancelacion">
         <p>Se cancelo la operación</p>
-        <button id="volverInicio">Volver al Inicio</button>
+        <button id="volverInicio" class="boton" >Volver al Inicio</button>
     </div>
     
     <div id="tablaVinos"></div>

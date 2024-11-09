@@ -43,7 +43,9 @@ export class GestorReporteRankingVinos {
         let vinosOrdenados = vinosEncontrados.sort((a, b) => b.promedioSomm - a.promedioSomm);
         console.log('Cantidad vinos encontrados:', vinosOrdenados.length);
         let topDiez = vinosOrdenados.splice(0, 10);
-        this.generarReporte(topDiez);
+        if (topDiez.length > 0) {
+            this.generarReporte(topDiez);
+        }
         return topDiez;
     }
     generarReporte(data) {
@@ -112,7 +114,6 @@ export class GestorReporteRankingVinos {
         if (vinosEncontrados.length === 0) {
             this.informarSituacion("no se encontraron vinos con resenas de sommelier");
         }
-        console.log(JSON.stringify(vinosEncontrados));
         return vinosEncontrados;
     }
 }

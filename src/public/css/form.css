@@ -1,4 +1,14 @@
-
+.boton{
+    padding: 0.35rem;
+    background-color: lightgrey;
+    border: none;
+}
+.boton:hover{
+    padding: 0.3rem;
+    background-color: rgb(102, 25, 25);
+    color: #fff;
+    border: none;
+}
 .form-reportes {
     width: 37.5rem; /* 600px / 16 */
     margin: 3.125rem auto; /* 50px / 16 */

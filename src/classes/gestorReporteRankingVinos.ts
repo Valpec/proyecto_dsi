@@ -31,6 +31,7 @@ export class GestorReporteRankingVinos<T> {
     tomarTipoVisualizacion() { }
 
     tomarConfirmacionGenerarReporte(datosReporte: Reporte, vinosArray: Vino[], provincias: Provincia[], paises: Pais[]) {
+        
         const vinosEncontrados = this.buscarVinosEnPeriodoConResenas(datosReporte, vinosArray, provincias, paises)
 
         const topDiez = this.ordenarVinosPorCalificacion(vinosEncontrados)
@@ -55,7 +56,9 @@ export class GestorReporteRankingVinos<T> {
         let vinosOrdenados = vinosEncontrados.sort((a: any, b: any) => b.promedioSomm - a.promedioSomm)
         console.log('Cantidad vinos encontrados:', vinosOrdenados.length)
         let topDiez = vinosOrdenados.splice(0, 10)
-        this.generarReporte(topDiez)
+        if(topDiez.length>0){
+            this.generarReporte(topDiez)
+        }
         return topDiez
     }
 
@@ -141,7 +144,6 @@ export class GestorReporteRankingVinos<T> {
         if (vinosEncontrados.length === 0) {
             this.informarSituacion("no se encontraron vinos con resenas de sommelier")
         }
-        console.log(JSON.stringify(vinosEncontrados))
         return vinosEncontrados
 
     }

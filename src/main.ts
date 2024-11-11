@@ -1,8 +1,8 @@
-import { GestorReporteRankingVinos } from "./classes/gestorReporteRankingVinos.js";
-import { Vino } from "./classes/vino.js";
+import { GestorReporteRankingVinos } from "./classes/control/gestorReporteRankingVinos.js";
+import { Vino } from "./classes/entities/vino.js";
 import { VinoSuperbase } from "./services/VinosParseadosService.js";
-import { Provincia } from "./classes/provincia.js";
-import { Pais } from "./classes/pais.js";
+import { Provincia } from "./classes/entities/provincia.js";
+import { Pais } from "./classes/entities/pais.js";
 import { Reporte } from "./public/ts/app.js";
 
 let vinos: Vino[] = [];

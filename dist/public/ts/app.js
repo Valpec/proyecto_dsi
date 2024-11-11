@@ -24,7 +24,6 @@ form.addEventListener('submit', function (e) {
     let tipoResena = document.getElementById('tipoResena').value;
     let formaVisualizacion = document.getElementById('tipoVisualizacion').value;
     const msjError = document.getElementById('msjError');
-    console.log('submit');
     let msjAlt = document.getElementById('msjAlt');
     const fechaValida = validacionFecha(fechaDesde, fechaHasta);
     if (!fechaValida) {

@@ -2,7 +2,7 @@ import { Maridaje } from "./maridaje.js";
 import { Resena } from "./resena.js";
 import { Varietal } from "./varietal.js";
 import { Bodega } from "./bodega.js";
-import { IteradorResena } from "./iteradorResena.js";
+import { IteradorResena } from "../iterator/iteradorResena.js";
 import { Provincia } from "./provincia.js";
 import { Pais } from "./pais.js";
 export class Vino {

@@ -1,13 +1,13 @@
 import supabase from './supaBaseClient.js';
-import { Vino } from '../classes/vino.js';
-import { Bodega } from '../classes/bodega.js';
-import { Maridaje } from '../classes/maridaje.js';
-import { Resena } from '../classes/resena.js';
-import { Varietal } from '../classes/varietal.js';
-import { RegionVitivinicola } from '../classes/regionVitivinicola.js';
-import { Pais } from '../classes/pais.js';
-import { Provincia } from '../classes/provincia.js';
-import { TipoUva } from '../classes/tipoUva.js';
+import { Vino } from '../classes/entities/vino.js';
+import { Bodega } from '../classes/entities/bodega.js';
+import { Maridaje } from '../classes/entities/maridaje.js';
+import { Resena } from '../classes/entities/resena.js';
+import { Varietal } from '../classes/entities/varietal.js';
+import { RegionVitivinicola } from '../classes/entities/regionVitivinicola.js';
+import { Pais } from '../classes/entities/pais.js';
+import { Provincia } from '../classes/entities/provincia.js';
+import { TipoUva } from '../classes/entities/tipoUva.js';
 
 export class VinoSuperbase {
     private paisInstance: Pais | null = null;

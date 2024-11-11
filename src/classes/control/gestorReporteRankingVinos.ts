@@ -1,8 +1,8 @@
-import { Reporte } from "../public/ts/app.js";
-import { IteradorVino } from "./iteradorVino.js";
-import { Pais } from "./pais.js";
-import { Provincia } from "./provincia.js";
-import { Vino } from "./vino.js";
+import { Reporte } from "../../public/ts/app.js";
+import { IteradorVino } from "../iterator/iteradorVino.js";
+import { Pais } from "../entities/pais.js";
+import { Provincia } from "../entities/provincia.js";
+import { Vino } from "../entities/vino.js";
 
 export class GestorReporteRankingVinos<T> {
     private vinos: Vino[]

@@ -1,4 +1,4 @@
-import { GestorReporteRankingVinos } from "./classes/gestorReporteRankingVinos.js";
+import { GestorReporteRankingVinos } from "./classes/control/gestorReporteRankingVinos.js";
 import { VinoSuperbase } from "./services/VinosParseadosService.js";
 let vinos = [];
 let paises = [];

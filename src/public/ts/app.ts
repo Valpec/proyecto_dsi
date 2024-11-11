@@ -51,7 +51,6 @@ form.addEventListener('submit', function(e) {
     let tipoResena = (document.getElementById('tipoResena') as HTMLOptionElement).value;
     let formaVisualizacion = (document.getElementById('tipoVisualizacion') as HTMLOptionElement).value
     const msjError = document.getElementById('msjError') as HTMLElement
-    console.log('submit')
 
     let msjAlt = document.getElementById('msjAlt') as HTMLElement
 

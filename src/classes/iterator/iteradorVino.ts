@@ -1,5 +1,5 @@
 import { IIterador } from "./iteradorInterface.js";
-import { Vino } from "./vino.js";
+import { Vino } from "../entities/vino.js";
 
 export class IteradorVino implements IIterador{
 

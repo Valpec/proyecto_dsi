@@ -1,5 +1,5 @@
 import { IIterador } from "./iteradorInterface.js";
-import { Resena } from "./resena.js";
+import { Resena } from "../entities/resena.js";
 
 export class IteradorResena implements IIterador{
 

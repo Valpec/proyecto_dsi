@@ -9,9 +9,6 @@ export class RegionVitivinicola {
     }
     contarBodegas() {
     }
-    establecerProvincia(provincia) {
-        // this.provincia = provincia
-    }
     getNombre() {
         return this.nombre;
     }

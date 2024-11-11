@@ -38,24 +38,9 @@ const formulario = document.getElementById("reporteForm") as HTMLElement;
 const msjCancelacion = document.getElementById("msjCancelacion") as HTMLElement;
 const volverAlInicio = document.getElementById("volverInicio") as HTMLButtonElement;
 const tablaContainer = document.getElementById("tablaVinos") as HTMLElement;
+let msjError = document.getElementById('msjError') as HTMLElement
+let msjAlt = document.getElementById('msjAlt') as HTMLElement
 
-if (botonCancelar && formulario && msjCancelacion && volverAlInicio && tablaContainer) {
-    msjCancelacion.style.display = "none";
-
-    botonCancelar.addEventListener("click", () => {
-        formulario.style.display = "none";  
-        tablaContainer.style.display = "none"; 
-        msjCancelacion.style.display = "block"; 
-        
-    });
-
-    volverAlInicio.addEventListener("click", () => {
-        window.location.href = "index.html"; 
-
-    });
-} else {
-    console.error("Error: Uno o más elementos necesarios no se encontraron en el DOM.");
-}
 
 const form = document.getElementById('reporteForm')!;
 
@@ -66,7 +51,7 @@ form.addEventListener('submit', function(e) {
     let tipoResena = (document.getElementById('tipoResena') as HTMLOptionElement).value;
     let formaVisualizacion = (document.getElementById('tipoVisualizacion') as HTMLOptionElement).value
     const msjError = document.getElementById('msjError') as HTMLElement
-
+    console.log('submit')
 
     let msjAlt = document.getElementById('msjAlt') as HTMLElement
 
@@ -89,7 +74,7 @@ form.addEventListener('submit', function(e) {
     
         const vec = tomarConfirmacionGenerarReporte(reporte)
     
-        if (vec.length > 0) {
+        if (vec.length > 0 ) {
             msjCancelacion.style.display = "none"; 
             msjError.style.display = 'none'
             msjAlt.style.display = 'none'
@@ -105,6 +90,7 @@ form.addEventListener('submit', function(e) {
   
 
 });
+
 
 function generarTablaVinos(vinos:VinoEncontrado[]){
 
@@ -155,3 +141,23 @@ function generarTablaVinos(vinos:VinoEncontrado[]){
 
 }
 
+if (botonCancelar && formulario && msjCancelacion && volverAlInicio && tablaContainer) {
+    msjCancelacion.style.display = "none";
+
+    botonCancelar.addEventListener("click", () => {
+        formulario.style.display = "none";  
+        msjCancelacion.style.display = "block"; 
+        tablaContainer.style.display = "none"
+        msjAlt.style.display = "none"
+        msjError.style.display = "none"
+        tablaContainer.innerHTML = ""
+        
+    });
+
+    volverAlInicio.addEventListener("click", () => {
+        window.location.href = "index.html"; 
+
+    });
+} else {
+    console.error("Error: Uno o más elementos necesarios no se encontraron en el DOM.");
+}
